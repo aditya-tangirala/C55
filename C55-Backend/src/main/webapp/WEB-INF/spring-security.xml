@@ -10,7 +10,7 @@ http://www.springframework.org/schema/security/spring-security.xsd">
 
 	<http auto-config="true" create-session="ifRequired"
 		disable-url-rewriting="true">
-		<intercept-url pattern="/*"  requires-channel="any"/>
+		<intercept-url pattern="/*"  requires-channel="https"/>
 		<headers disabled="true" />
 		<csrf disabled="false" />
 		<form-login login-page="/index" default-target-url='/index'

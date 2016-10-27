@@ -52,9 +52,10 @@ public class LoginController {
 	@RequestMapping(value = "Customer/home", method = RequestMethod.GET)
 	public String custAccounts(HttpServletRequest request) {
 		System.out.println("Accounts");
-		if (request.isRequestedSessionIdValid()) {
+		HttpSession session = request.getSession(false);
+		if (session.getAttribute("custId")!=null) {
 			System.out.println("valid session");
-			HttpSession session = request.getSession(false);
+			//HttpSession session = request.getSession(false);
 			System.out.println(session.getId());
 			// return (String) session.getAttribute("url");
 			return "Customer/accounts";
@@ -65,9 +66,10 @@ public class LoginController {
 	@RequestMapping(value = "Merchant/home", method = RequestMethod.GET)
 	public String merchantAccounts(HttpServletRequest request) {
 		System.out.println("Accounts");
-		if (request.isRequestedSessionIdValid()) {
+		HttpSession session = request.getSession(false);
+		if (session.getAttribute("custId")!=null) {
 			System.out.println("valid session");
-			HttpSession session = request.getSession(false);
+			//HttpSession session = request.getSession(false);
 			System.out.println(session.getId());
 			// return (String) session.getAttribute("url");
 			return "Merchant/accounts";
@@ -78,9 +80,10 @@ public class LoginController {
 	@RequestMapping(value = "Employee/home", method = RequestMethod.GET)
 	public String EmpAccounts(HttpServletRequest request) {
 		System.out.println("Employee");
-		if (request.isRequestedSessionIdValid()) {
+		HttpSession session = request.getSession(false);
+		if (session.getAttribute("custId")!=null) {
 			System.out.println("valid session");
-			HttpSession session = request.getSession(false);
+			//HttpSession session = request.getSession(false);
 			System.out.println(session.getId());
 			// return (String) session.getAttribute("url");
 			return "Employee/register";
@@ -91,9 +94,10 @@ public class LoginController {
 	@RequestMapping(value = "Manager/home", method = RequestMethod.GET)
 	public String ManagerAccounts(HttpServletRequest request) {
 		System.out.println("Manager");
-		if (request.isRequestedSessionIdValid()) {
+		HttpSession session = request.getSession(false);
+		if (session.getAttribute("custId")!=null) {
 			System.out.println("valid session");
-			HttpSession session = request.getSession(false);
+			//HttpSession session = request.getSession(false);
 			System.out.println(session.getId());
 			// return (String) session.getAttribute("url");
 			return "Manager/register";
@@ -104,9 +108,10 @@ public class LoginController {
 	@RequestMapping(value = "Admin/home", method = RequestMethod.GET)
 	public String adminAccounts(HttpServletRequest request) {
 		System.out.println("Admin");
-		if (request.isRequestedSessionIdValid()) {
+		HttpSession session = request.getSession(false);
+		if (session.getAttribute("custId")!=null) {
 			System.out.println("valid session");
-			HttpSession session = request.getSession(false);
+			//HttpSession session = request.getSession(false);
 			System.out.println(session.getId());
 			// return (String) session.getAttribute("url");
 			return "redirect:/Admin/RoleAddition";
@@ -121,6 +126,7 @@ public class LoginController {
 
 			String custType = login.getCustType();
 			HttpSession session = request.getSession(false);
+			
 			if (request.isRequestedSessionIdValid() && !custType.equals(null)) {
 				ExternalUser user = null;
 				Admin admin = null;
