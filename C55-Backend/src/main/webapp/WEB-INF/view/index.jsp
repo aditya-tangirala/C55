@@ -18,8 +18,13 @@
 <meta charset="utf-8">
 <!-- jQuery (required) & jQuery UI + theme (optional) -->
 <link href="/C55-Backend/assets/css/jquery-ui.min.css" rel="stylesheet">
-
+<script type="text/javascript"> //<![CDATA[ 
+var tlJsHost = ((window.location.protocol == "https:") ? "https://secure.comodo.com/" : "http://www.trustlogo.com/");
+document.write(unescape("%3Cscript src='" + tlJsHost + "trustlogo/javascript/trustlogo.js' type='text/javascript'%3E%3C/script%3E"));
+//]]>
+</script>
 </head>
+
 <body>
 
 	<!-- Page Wrapper -->
@@ -33,6 +38,11 @@
 			<nav>
 				<a href="#menu">Log In</a>
 			</nav>
+		
+		<script language="JavaScript" type="text/javascript">
+TrustLogo("https://c55.mobicloud.asu.edu/comodo_secure_seal_113x59_transp.png", "CL1", "none");
+</script>
+		
 		</header>
 		<!-- Menu-->
 		<nav id="menu">
@@ -99,7 +109,7 @@
 				<div class="content">
 					<h2 class="major">Research</h2>
 					<p>Through timely, in-depth analysis of companies, industries,
-						markets, and world economies, Morgan Stanley has earned its
+						markets, and world economies, C55 Bank has earned its
 						reputation as a leader in the field of investment research.</p>
 				</div>
 			</div>

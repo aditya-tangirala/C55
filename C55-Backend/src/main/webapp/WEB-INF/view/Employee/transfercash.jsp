@@ -88,7 +88,7 @@
             '${_csrf.parameterName}':"${_csrf.token}"
     	}
     	var dataString = JSON.stringify(postdata);
-    	alert(dataString);
+    	//alert(dataString);
     	$.ajax({
     		type: 'POST',
     		async: false,
@@ -110,8 +110,8 @@
 			
     		success: function(responsedata,status){
     			if(responsedata.status=="Success"){
-    				console.log(responsedata);
-    			alert(responsedata);
+    			//	console.log(responsedata);
+    			alert("Success");
     			}
     			else
     				alert("Insufficient funds");

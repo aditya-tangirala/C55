@@ -147,7 +147,7 @@
 					alert('Unable to Update' + responsedata.status);
 			},
 			error : function(e) {
-				console.log(e.message);
+				//console.log(e.message);
 				alert('Error cond: Unable to Update');
 			}
 		});

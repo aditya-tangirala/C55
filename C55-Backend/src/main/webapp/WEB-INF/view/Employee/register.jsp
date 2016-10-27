@@ -196,7 +196,7 @@ function addnewaccount(){
             success: function(data,status){
             	if(status=="success")
             		{
-              console.log(data);
+              //console.log(data);
               alert("Account Created");
                 //window.location.assign("otp.html");
             		}

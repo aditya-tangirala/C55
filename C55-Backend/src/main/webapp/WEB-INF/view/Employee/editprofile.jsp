@@ -196,7 +196,7 @@
                             if(data.status="success")
                         	  alert("Success");
                             else
-                          	  alert(data.error)
+                          	  alert(data.error);
 
 	                          },
                           error: function(jqXHR, exception){
