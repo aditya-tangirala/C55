@@ -1,5 +1,7 @@
 package org.asu.ss.dao;
 
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -101,8 +103,12 @@ public class IntDAO {
 				query.setParameter("eid",pwdres.getEid());
 				iu=(InternalUser) query.uniqueResult();
 				long temppassword = (long) (Math.random() * 100000000L);
+				String pwd = Long.toString(temppassword) + "$%&)";
+				System.out.println("IntDAO.approveRequest() before : "+pwd);
+				String pwd1 = new String(hash(pwd));
+				System.out.println("IntDAO.approveRequest() after : "+pwd1);
 				query = session.createQuery("UPDATE InternalUser set password= :pwd where e_id = :eid");
-				query.setParameter("pwd", Long.toString(temppassword));
+				query.setParameter("pwd", pwd1);
 				query.setParameter("eid", pwdres.getEid());
 				if(query.executeUpdate()==0)
 					{
@@ -110,7 +116,7 @@ public class IntDAO {
 					}
 				SendMail sm= new SendMail();
 				System.out.println("Email: "+iu.getEmail()+"Password: "+temppassword);
-				sm.sendMail(iu.getEmail(),Long.toString(temppassword));
+				sm.sendMail(iu.getEmail(), pwd);
 				query= session.createQuery("delete PasswordReset where e_id = :eid");
 				query.setParameter("eid",pwdres.getEid());
 				int result = query.executeUpdate();
@@ -136,6 +142,13 @@ public class IntDAO {
 			return false;
 		}
 		return true;
+	}
+	
+	public byte[] hash(String password) throws NoSuchAlgorithmException {
+	    MessageDigest sha256 = MessageDigest.getInstance("SHA-256");        
+	    byte[] passBytes = password.getBytes();
+	    byte[] passHash = sha256.digest(passBytes);
+	    return passHash;
 	}
 
 	

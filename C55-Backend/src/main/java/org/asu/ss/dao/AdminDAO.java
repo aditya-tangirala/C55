@@ -4,6 +4,8 @@ import java.io.IOException;
 import java.nio.charset.Charset;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.util.List;
 
 import org.asu.ss.model.InternalUser;
@@ -30,6 +32,9 @@ public class AdminDAO {
 
 		if(employee != null){
 			try{
+				System.out.println("AdminDAO.saveEmployeeRecord() before : "+employee.getPassword());
+				employee.setPassword(new String(hash(employee.getPassword())));
+				System.out.println("AdminDAO.saveEmployeeRecord() after : "+employee.getPassword());
 				session.save(employee);
 				transaction.commit();
 				return true;
@@ -58,6 +63,13 @@ public class AdminDAO {
 		}
 		return user;
 	}
+	
+	public byte[] hash(String password) throws NoSuchAlgorithmException {
+	    MessageDigest sha256 = MessageDigest.getInstance("SHA-256");        
+	    byte[] passBytes = password.getBytes();
+	    byte[] passHash = sha256.digest(passBytes);
+	    return passHash;
+	}
 
 	public boolean updateEmployeeRecord(InternalUser employee) {
 		Session session = sessionFactory.openSession();
@@ -70,7 +82,9 @@ public class AdminDAO {
 				empDb.setAccess_level(employee.getAccess_level());
 				empDb.setF_name(employee.getF_name());
 				empDb.setL_name(employee.getL_name());
-				empDb.setPassword(employee.getPassword());
+				System.out.println("AdminDAO.updateEmployeeRecord() employee.getPassword() before "+employee.getPassword());
+				empDb.setPassword(new String(hash(employee.getPassword())));
+				System.out.println("AdminDAO.updateEmployeeRecord() after : "+empDb.getPassword());
 				session.update(empDb);
 				transaction.commit();
 				return true;

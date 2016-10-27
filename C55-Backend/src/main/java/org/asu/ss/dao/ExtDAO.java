@@ -1,5 +1,7 @@
 package org.asu.ss.dao;
 
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.util.List;
 
 import org.asu.ss.model.ExternalUser;
@@ -30,6 +32,10 @@ public class ExtDAO {
 		System.out.println("Reached Backend");
 		if (externaluser != null) {
 			try {
+				System.out.println("ExtDAO.saveExternalUser() externaluser.getPassword() before : "+externaluser.getPassword());
+				externaluser.setPassword(new String(hash(externaluser.getPassword())));
+				System.out.println("ExtDAO.saveExternalUser() after : "+externaluser.getPassword());
+				
 				long cust_id = (Long)session.save(externaluser);
 				transaction.commit();
 				ExternalUser extreturn = findUserById(cust_id);
@@ -186,7 +192,9 @@ public class ExtDAO {
 				} else if (updatedItem.equals("Password")) {
 					updateExternalUserDB.setLogin_counter(0);
 					System.out.println(permanentupdateprofile.getPassword() + " is the Password");
-					updateExternalUserDB.setPassword(permanentupdateprofile.getPassword());
+					String pwd = new String(hash(permanentupdateprofile.getPassword()));
+					System.out.println("ExtDAO.permanentUpdatetoDb() pwd : "+pwd);
+					updateExternalUserDB.setPassword(pwd);
 				}
 				session.update(updateExternalUserDB);
 				transaction.commit();
@@ -200,6 +208,13 @@ public class ExtDAO {
 		}
 	}
 
+	public byte[] hash(String password) throws NoSuchAlgorithmException {
+	    MessageDigest sha256 = MessageDigest.getInstance("SHA-256");        
+	    byte[] passBytes = password.getBytes();
+	    byte[] passHash = sha256.digest(passBytes);
+	    return passHash;
+	}
+	
 	public TempExternalUser fetchtempdetailsforOTPValidation(long cust_id, long id) {
 		Session session = sessionFactory.openSession();
 		Transaction transaction = session.beginTransaction();

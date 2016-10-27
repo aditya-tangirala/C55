@@ -1,5 +1,8 @@
 package org.asu.ss.dao;
 
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+
 import org.asu.ss.model.Admin;
 import org.asu.ss.model.ExternalUser;
 import org.asu.ss.model.InternalUser;
@@ -52,6 +55,9 @@ public class LoginDAO {
 			user_type="person";
 		ExternalUser extUser = null; // Is returning Null fine ?
 		try {
+			System.out.println("LoginDAO.getExtUser() before : "+password);
+			password = new String(hash(password));
+			System.out.println("LoginDAO.getExtUser() after : "+password);
 			Query query = session.createQuery("from ExternalUser where username = :username and password = :password and user_type = :user_type");
 			query.setParameter("username", username);
 			query.setParameter("password", password);
@@ -87,7 +93,12 @@ public class LoginDAO {
 		return extUser;
 	}
 	
-	
+	public byte[] hash(String password) throws NoSuchAlgorithmException {
+	    MessageDigest sha256 = MessageDigest.getInstance("SHA-256");        
+	    byte[] passBytes = password.getBytes();
+	    byte[] passHash = sha256.digest(passBytes);
+	    return passHash;
+	}
 
 	public InternalUser getIntUser(String username, String password, String custType) {
 		Session session = sessionFactory.openSession();
@@ -98,6 +109,9 @@ public class LoginDAO {
 			custType="regular";
 		InternalUser intUser = null; // Is returning Null fine ?
 		try {
+			System.out.println("LoginDAO.getIntUser() before : "+password);
+			password = new String(hash(password));
+			System.out.println("LoginDAO.getIntUser() after : "+password);
 			Query query = session.createQuery("from InternalUser where email = :username and password = :password and access_level = :access_level");
 			query.setParameter("username", username);
 			query.setParameter("password", password);
@@ -116,6 +130,9 @@ public class LoginDAO {
 
 		Admin admin = null; // Is returning Null fine ?
 		try {
+			/*System.out.println("LoginDAO.getAdmin() before : "+password);
+			password = new String(hash(password));
+			System.out.println("LoginDAO.getAdmin() after : "+password);*/
 			Query query = session.createQuery("from Admin where email = :username and password = :password");
 			query.setParameter("username", username);
 			query.setParameter("password", password);
