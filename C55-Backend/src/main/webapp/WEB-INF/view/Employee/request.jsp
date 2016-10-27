@@ -37,6 +37,18 @@
 
 function noBack() { window.history.forward(); }
 
+function timeConverter(UNIX_timestamp){ 
+	var a = new Date(UNIX_timestamp); 
+	var months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec']; 
+	var year = a.getFullYear();
+	var month = months[a.getMonth()]; 
+	var date = a.getDate(); var hour = a.getHours(); 
+	var min = a.getMinutes(); 
+	var sec = a.getSeconds();
+	var time = date + ' ' + month + ' ' + year + ' ' + hour + ':' + min + ':' + sec ; 
+	return time;
+	}
+
 function csrfsafe(xhr)
 {
 	var token = $("meta[name='_csrf']").attr("content");
@@ -124,7 +136,7 @@ function csrfsafe(xhr)
 			row[0] = dataSet2[i].t_id;
 			row[1] = dataSet2[i].from_acc;
 			row[2] = dataSet2[i].to_acc;
-			row[3] = dataSet2[i].t_timestamp;
+			row[3] = timeConverter(dataSet2[i].t_timestamp);
 			row[4] = dataSet2[i].t_amount;
 
 			row[5] = gE1 + i + gE2;
@@ -281,7 +293,7 @@ function csrfsafe(xhr)
 			row[0] = dataSet2[i].t_id;
 			row[1] = dataSet2[i].from_acc;
 			row[2] = dataSet2[i].to_acc;
-			row[3] = dataSet2[i].t_timestamp;
+			row[3] = timeConverter(dataSet2[i].t_timestamp);
 			row[4] = dataSet2[i].t_amount;
 
 			row[5] = gE1 + i + gE2;

@@ -56,11 +56,10 @@
 						<br /> <input type="submit" value="Login" />
 					</div>
 				</form:form>
-				<a href="#" class="close">Close</a> <span class="psw"><a
+				 <span class="psw"><a
 					href="${home}forgotpassword">Forgot password?</a></span>
 			</div>
 		</nav>
-		<a href="#" class="close">Close</a>
 	</div>
 
 

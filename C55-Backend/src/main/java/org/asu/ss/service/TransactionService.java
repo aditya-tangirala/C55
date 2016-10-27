@@ -420,7 +420,17 @@ public class TransactionService {
 		BackendResponse backendResponse = new BackendResponse();
 		Transaction transactionFromDB = transactionDAO.getTransaction(transaction);
 		Account to_account = this.accountDAO.findAccountById(transaction.getTo_acc());
-		
+		Account from_account = this.accountDAO.findAccountById(transaction.getFrom_acc());
+		if(to_account == null)
+		{
+			from_account.setAcc_balance(from_account.getAcc_balance() + transactionFromDB.getT_amount());
+			accountDAO.updateAccount(from_account);
+			transactionFromDB.setT_status(TransactionService.DECLINED);
+			transactionDAO.updateTransaction(transactionFromDB);
+			backendResponse.setStatus(BackendResponse.FAILURE);
+			backendResponse.setError("To Account not found!");
+			return backendResponse;
+		}
 		if(transactionFromDB.getT_status().equals(TransactionService.INITIATED))
 		{
 			to_account.setAcc_balance(to_account.getAcc_balance() + transactionFromDB.getT_amount());

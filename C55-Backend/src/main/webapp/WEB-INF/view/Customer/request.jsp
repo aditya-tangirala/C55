@@ -5,7 +5,7 @@
 <html lang="en">
 
 <head>
-<c:url var="home" value="/" scope="request" />
+<!-- <c:url var="home" value="/" scope="request" /> -->
 
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -33,6 +33,18 @@
 
 
 <script type="text/javascript">
+
+function timeConverter(UNIX_timestamp){ 
+	var a = new Date(UNIX_timestamp); 
+	var months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec']; 
+	var year = a.getFullYear();
+	var month = months[a.getMonth()]; 
+	var date = a.getDate(); var hour = a.getHours(); 
+	var min = a.getMinutes(); 
+	var sec = a.getSeconds();
+	var time = date + ' ' + month + ' ' + year + ' ' + hour + ':' + min + ':' + sec ; 
+	return time;
+	}
 	//this requires ajax and hits Rest Controller
 	function csrfsafe(xhr)
 {
@@ -104,7 +116,7 @@
 			row[0] = dataSet[i].t_id;
 			row[1] = dataSet[i].from_acc;
 			row[2] = dataSet[i].to_acc;
-			row[3] = dataSet[i].t_timestamp;
+			row[3] = timeConverter(dataSet[i].t_timestamp);
 			row[4] = dataSet[i].t_amount;
 
 			row[5] = gE1 + i + gE2;
@@ -348,10 +360,6 @@
 
 				</div>
 
-
-
-
-<label id="test"></label>
 
 
 			</div>

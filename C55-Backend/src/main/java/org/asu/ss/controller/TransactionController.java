@@ -71,6 +71,10 @@ public class TransactionController {
 			e.printStackTrace();
 			System.out.println("TransactionController.transferFunds() exception");
 		}
+		if (backendResponse.getStatus().equals(BackendResponse.FAILURE))
+		{
+			session.setAttribute("tranSuccess","Failure");
+		}
 		System.out.println("TransactionController.transferFunds() "+backendResponse.getStatus());
 		session.setAttribute("Otp_Id", transaction.getOtp_id());
 		session.setAttribute("TransID", transaction.getT_id());
@@ -140,7 +144,7 @@ public class TransactionController {
 		return new ResponseEntity<BackendResponse>(backendResponse, HttpStatus.OK);
 	}
 	
-	@RequestMapping(value={"/transfer/approve/internal","/Employee/transfer/approve/internal"}, method=RequestMethod.POST, produces=MediaType.APPLICATION_JSON_VALUE)
+	@RequestMapping(value={"Customer/transfer/approve/internal","/Employee/transfer/approve/internal"}, method=RequestMethod.POST, produces=MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<BackendResponse> approveFundTransfer(@RequestBody Transaction transaction)
 	{
 		BackendResponse backendResponse = new BackendResponse();
@@ -157,7 +161,7 @@ public class TransactionController {
 		return new ResponseEntity<BackendResponse>(backendResponse, HttpStatus.OK);
 	}
 	
-	@RequestMapping(value={"/transfer/decline/internal","/Employee/transfer/decline/internal"}, method=RequestMethod.POST, produces=MediaType.APPLICATION_JSON_VALUE)
+	@RequestMapping(value={"Customer/transfer/decline/internal","/Employee/transfer/decline/internal"}, method=RequestMethod.POST, produces=MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<BackendResponse> declineFundTransfer(@RequestBody Transaction transaction)
 	{
 		BackendResponse backendResponse = new BackendResponse();
@@ -233,6 +237,10 @@ public class TransactionController {
 			e.printStackTrace();
 			backendResponse.setStatus(BackendResponse.FAILURE);
 			backendResponse.setError("OOPS! AN ERROR HAS OCCURRED. PLEASE TRY AGAIN.");
+		}
+		if (backendResponse.getStatus().equals(BackendResponse.FAILURE))
+		{
+			session.setAttribute("tranSuccess","Failure");
 		}
 		session.setAttribute("Otp_Id", transaction.getOtp_id());
 		session.setAttribute("TransID", transaction.getT_id());
