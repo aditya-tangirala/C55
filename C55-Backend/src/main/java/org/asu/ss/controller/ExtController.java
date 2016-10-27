@@ -136,7 +136,7 @@ public class ExtController {
 	}
 
 	// To update the password(OTP Generation)(Email and Phone numbers)(Completed)
-		@RequestMapping(value = "/support/request", method = RequestMethod.POST, produces = MediaType.ALL_VALUE)
+		@RequestMapping(value = {"/support/request", "user/support/request"}, method = RequestMethod.POST, produces = MediaType.ALL_VALUE)
 		public ResponseEntity<String> updateInfoforPasswordReset(@RequestBody TempExternalUser tempexternaluser) {
 			String[] response = new String[2];
 			response[0] = "Error - Profile Update cannot be completed.";

@@ -136,7 +136,7 @@ public class LoginController {
 					if (user != null) {
 						if (user.getLogin_counter() > 10) {
 							// Let user know about exceeding the attempts
-							return "redirect:/";
+							return "Customer/accountlocked";
 						} else {
 							session.setAttribute("custId", user.getCust_id());
 						}
@@ -178,6 +178,7 @@ public class LoginController {
 
 	}
 
+	
 	@RequestMapping(value = "forgotpassword")
 	public String validateLoginCredentials() {
 		return "forgotpassword";
