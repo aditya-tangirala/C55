@@ -34,12 +34,46 @@
 
 
 <script type="text/javascript">
-function noBack() { window.history.forward(); }
-function csrfsafe(xhr)
-{
-	var token = $("meta[name='_csrf']").attr("content");
-	var header = $("meta[name='_csrf_header']").attr("content");
-	xhr.setRequestHeader(header, token);
+	function validphone() {
+
+		var mobile = document.getElementById("mobile").value;
+
+		if (mobile.length != 10) {
+			alert("Please enter correct mobile number");
+			return false;
+
+		}
+
+	}
+
+	function validphone() {
+
+		var ssn = document.getElementById("ssn").value;
+
+		if (ssn.length != 9) {
+			alert("Please enter correct mobile number");
+			return false;
+
+		}
+
+	}
+
+	function validPass() {
+		var pass = document.getElementById("password").value;
+		var confpass = document.getElementById("password1").value;
+
+		if (pass != confpass) {
+			alert("Passwords don't match.");
+			return false;
+		}
+	}
+	function noBack() {
+		window.history.forward();
+	}
+	function csrfsafe(xhr) {
+		var token = $("meta[name='_csrf']").attr("content");
+		var header = $("meta[name='_csrf_header']").attr("content");
+		xhr.setRequestHeader(header, token);
 	}
 	function readfile(file) {
 
@@ -76,6 +110,10 @@ function csrfsafe(xhr)
 
 	}
 	function createUser() {
+		/*var res = validaphone();
+		var res1 = validssn();
+		if (!res || !res1)
+			return false;*/
 		var internalUser = {
 
 			"f_name" : $('#fName').val(),
@@ -85,7 +123,7 @@ function csrfsafe(xhr)
 			'mobile' : $('#mobile').val(),
 			'ssn' : $('#ssn').val(),
 			'trusted_devices' : "none",
-			
+
 			'password' : $('#password').val()
 		}
 		var dataString = JSON.stringify(internalUser);
@@ -95,26 +133,26 @@ function csrfsafe(xhr)
 			dataType : "json",
 			url : "${home}employee/create",
 			data : dataString,
-			async:false,
+			async : false,
 			contentType : "application/json; charset=utf-8",
-			 beforeSend: function(xhr) {
-		            // here it is
-		            csrfsafe(xhr);
-		        },
+			beforeSend : function(xhr) {
+				// here it is
+				csrfsafe(xhr);
+			},
 			success : function(responsedata, status) {
 				if (responsedata.status == "Success") {
 					alert('Saved successfully');
 					return data;
-				}
-				else 
-					alert('Unable to Update'+responsedata.status);
+				} else
+					alert('Unable to Update' + responsedata.status);
 			},
 			error : function(e) {
 				console.log(e.message);
-				alert('Error cond: Unable to Update');			}
+				alert('Error cond: Unable to Update');
+			}
 		});
 	}
-	window.onload=noBack();
+	window.onload = noBack();
 </script>
 
 
@@ -146,11 +184,11 @@ function csrfsafe(xhr)
 			<div class="container">
 				<h2>New Internal Employee Creation</h2>
 				<form id="InternalEmployeeAddition" role="form"
-					class="form-horizontal" onsubmit="return createUser()">
+					class="form-horizontal" onsubmit=" return createUser()">
 
 					<div class="form-group">
 						<label for="role">Role:</label> <select class="form-control"
-							id="role">
+							id="role" required="required">
 							<option value="manager" title="Manager">Manager</option>
 							<option value="regular" title="Regular Employee">Regular
 								Employee</option>
@@ -176,11 +214,13 @@ function csrfsafe(xhr)
 						<div class="form-group">
 							<div class="col-sm-6">
 								<label>First name</label><input class="form-control"
-									placeholder="First Name" type="text" id="fName">
+									placeholder="First Name" type="text" id="fName"
+									required="required">
 							</div>
 							<div class="col-sm-6">
 								<label>Last name</label><input class="form-control"
-									placeholder="Last Name" type="text" id="lName">
+									placeholder="Last Name" type="text" id="lName"
+									required="required">
 							</div>
 
 						</div>
@@ -191,7 +231,7 @@ function csrfsafe(xhr)
 							<label for="sel1">Nationality:</label> <select
 								class="form-control" id="nationality">
 								<option value="Afghanistan" title="Afghanistan">Afghanistan</option>
-								<option value="Ã…land Islands" title="Ã…land Islands">Aland
+								<option value="land Islands" title="land Islands">Aland
 									Islands</option>
 								<option value="Albania" title="Albania">Albania</option>
 								<option value="Algeria" title="Algeria">Algeria</option>
@@ -550,24 +590,31 @@ function csrfsafe(xhr)
 						</div>
 						<div class="form-group">
 							<label for="SSN">Social Security Number</label> <input
-								type="number" class="form-control" id="ssn">
+								type="number" class="form-control" id="ssn" pattern="[0-9]{9}"
+								required="required">
 						</div>
 						<div class="form-group">
 							<label for="password">Password</label> <input type="password"
-								class="form-control" id="password">
+								class="form-control" id="password"
+								pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
+								required="required">
 						</div>
 						<div class="form-group">
 							<label for="password1">Confirm Password</label> <input
-								type="password" class="form-control" id="password1">
+								type="password" class="form-control" id="password1"
+								pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
+								required="required" onchange="validPass()">
 						</div>
 						<div class="form-group">
 							<label for="email">Email address:</label> <input type="email"
-								class="form-control" id="email">
+								class="form-control" id="email"
+								data-error="Bruh, that email address is invalid">
 						</div>
 
 						<div class="form-group">
 							<label for="mobile">Mobile No:</label> <input type="number"
-								class="form-control" id="mobile">
+								class="form-control" id="mobile" pattern="[0-9]{10}"
+								data-error="10 digit number only">
 						</div>
 
 

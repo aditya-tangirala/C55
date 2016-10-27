@@ -162,25 +162,21 @@ window.onload=loadPage;
                                   </div>
                                 </div>
                                 <div class="form-group">
-                                  <label class="col-lg-3 control-label">Phone:</label>
-                                  <div class="col-lg-8">
-                                    <input class="form-control" id="phone" type="number">
-                                  </div>
-                                </div>
+							<label for="SSN">Social Security Number</label> <input
+								type="number" class="form-control" id="password" pattern="[0-9]{9}" required="required">
+						</div>
+						
+						</div>
+						<div class="form-group">
+							<label for="email">Email address:</label> <input type="email"
+								class="form-control" id="email" data-error=" that email address is invalid">
+						</div>
 
-                                <div class="form-group">
-                                  <label class="col-lg-3 control-label">Email Id:</label>
-                                  <div class="col-lg-8">
-                                    <input class="form-control" id="email"  type="email">
-                                  </div>
-                                </div>
-
-                                <div class="form-group">
-                                  <label class="col-lg-3 control-label">SSN</label>
-                                  <div class="col-lg-8">
-                                    <input class="form-control" id="password"  type="text">
-                                  </div>
-                                </div>
+						<div class="form-group">
+							<label for="mobile">Mobile No:</label> <input type="number"
+								class="form-control" id="phone" pattern="[0-9]{10}" data-error="10 digit number only">
+						</div>
+                                
 
 
                             <div class="form-group">

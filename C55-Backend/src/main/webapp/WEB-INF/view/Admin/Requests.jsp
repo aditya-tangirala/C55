@@ -10,14 +10,15 @@ form {
 }
 </style>
 <c:url var="home" value="/" scope="request" />
-<meta name="_csrf" content="${_csrf.token}" />
-<meta name="_csrf_header" content="${_csrf.headerName}" />
+
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport"
 	content="width=device-width, shrink-to-fit=no, initial-scale=1">
 <meta name="description" content="">
 <meta name="author" content="">
+<meta name="_csrf" content="${_csrf.token}" />
+<meta name="_csrf_header" content="${_csrf.headerName}" />
 
 <title>C55 Bank</title>
 
@@ -51,7 +52,7 @@ form {
 		$.ajax({
 			type : "POST",
 			//dataType: "json",
-			url : "${home}system/users/view",
+    			url: "${home}admin/reqret",
 			//data: 'name='+name+'&lastname='+ lastName,//{myData:dataString},
 			//contentType: "application/json; charset=utf-8",
 			async : false,
@@ -77,28 +78,26 @@ form {
 
 	}
 	//addition of buttons for table data and conversion of map(json) to array of array(2D array)
-	function addButton(dataSet) {
-
-		var gE1 = "<button onclick='getEmployee(";
-		var gE2 = ")'>View </button>";
-		var pi1 = "<button onclick='getEmployeePII(";
-		var pi2 = ")'>View PII</button>";
-		var del1 = "<button onclick='deleteEmployee(";
-		var del2 = ")'>Remove</button>";
-
-		var table = [];
-		for (var i = 0; i < dataSet.length; i++) {
-			var row = [];
-			row[0] = dataSet[i].e_id;
-			row[1] = dataSet[i].f_name;
-			row[2] = dataSet[i].l_name;
-			row[3] = gE1 + i + gE2;
-			row[4] = pi1 + i + pi2;
-			row[5] = del1 + i + del2;
-			table[i] = row;
-		}
-		return table;
-	}
+    function addButton(dataSet)
+    {
+    	
+    	
+    	var pi1="<button onclick='submit(";
+    	var pi2=",true)'>accept</button>";
+    	var pi3="<button onclick='submit(";
+    	var pi4=	",false)'>reject</button>";
+    	
+	var table=[];
+    	for(var i=0;i<dataSet.length;i++)
+    		{
+    		var row=[];
+    		row[0]=dataSet[i][0];
+    		row[1]=pi1+i+pi2;
+    		row[2]=pi3+i+pi4;
+    		table[i]=row;
+    		}
+    	return table;
+    }
 	function addData(dataSet) {
 
 		$(document).ready(function() {
@@ -127,65 +126,46 @@ form {
 		});
 	}
 
-	//this requires ajax and hits Rest Controller
-	function deleteEmployee(r) {
-
+	    //this requires ajax and hits Rest Controller
+	function submit(r,flag)
+	{
+		
 		if (confirm('Are you sure?')) {
-			var postdata = {
-				"e_id" : allData[r].e_id,
-				"f_name" : allData[r].f_name,
-				"l_name" : allData[r].l_name,
-
-			}
+			var postdata = 
+	        {
+	        	"e_id"	: allData[r][0],
+	            "flag" : flag
+	         };
 			var dataString = JSON.stringify(postdata);
-			$.ajax({
-				type : "POST",
-				dataType : "json",
-				url : "${home}employee/delete", //url in AdminController(RestController)
-				data : dataString,
-				contentType : "application/json; charset=utf-8",
-				beforeSend : function(xhr) {
-					// here it is
-					csrfsafe(xhr);
-				},
-				success : function(data) {
-					alert('Employee record deleted successfully');
-					//getAllEmployees();
-					var table = $('#example').DataTable();
-					table.row('.selected').remove().draw(false);
-				},
-				error : function(e) {
-					console.log(e.message);
-				}
-			});
+            //alert(dataString);
+            $.ajax({
+                type: "POST",
+                async:false,
+                dataType: "json",
+                url: "${home}intuser/approveReject",
+                data: dataString,
+                beforeSend: function(xhr) {
+                    // here it is
+                    csrfsafe(xhr);
+                },
+                contentType: "application/json; charset=utf-8",
+                success: function(data){
+                    alert('transacion successfull');
+                    var table = $('#example').DataTable();
+                    table.row('.selected').remove().draw( false );
+                },
+                error: function(e){
+                    console.log(e);
+                }
+            });
 		}
-	}
-
-	//fetches details of employee needs redirection to different page 
-	function getEmployee(r) {
-
-		var urlAdd = "${home}Admin/GetGeneralEmployeeDetails";// url in AdminHomeController
-		submitData(r, urlAdd);
-	}
-	function getEmployeePII(r) {
-
-		var urlAdd = "${home}Admin/piipage";
-		submitData(r, urlAdd);
-	}
-	function submitData(r, urlAdd) {
-		//form submission achieved through hidden form myForm (look at the bottom of body )
-		$('#e_id').val(allData[r].e_id);
-		$('#f_name').val(allData[r].f_name);
-		$('#l_name').val(allData[r].l_name);
-		$("#myForm").attr("action", urlAdd);
-		$("#myForm").submit();
-
 	}
 
 	window.onload = getAllEmployees();
 </script>
 </head>
 <body>
+	<div id="wrapper">
 
 	<!-- Sidebar -->
 	<div id="sidebar-wrapper">
@@ -210,11 +190,9 @@ form {
 			<thead>
 				<tr>
 					<th>Employee ID</th>
-					<th>First Name</th>
-					<th>Last Name</th>
-					<th>Employee Info.</th>
-					<th>PII.</th>
-					<th>Remove Employee</th>
+						<th>Approve</th>
+						<th>Reject</th>
+
 				</tr>
 			</thead>
 			<!-- <tfoot>
@@ -230,13 +208,7 @@ form {
 	</div>
 	</div>
 
-	<form id="myForm" action="#" method="post">
-		<input type="text" id="f_name" name="f_name"> <input
-			type="text" id="l_name" name="l_name"> <input type="text"
-			id="e_id" name="e_id">
 
-
-	</form>
 
 </body>
 </html>

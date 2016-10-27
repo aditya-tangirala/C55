@@ -55,13 +55,14 @@
               document.getElementById("firstname").value= data["f_name"];
              document.getElementById("lastname").value= data["l_name"];
              document.getElementById("password").value=data["password"];
+             console.log(data);
             var role= data["access_level"];
             var $radios = $('input:radio[name=role]');
-            if($radios.is(':checked') === false) {
-                $radios.filter('[value=manager]').prop('checked', true);
-             
-             }
-        	  
+            if(data["access_level"]=="manager")
+            	$radios.filter('[value=manager]').prop('checked', true);
+            else
+            	$radios.filter('[value=regular]').prop('checked', true);
+            
           }
          
 function editprofile()
@@ -170,21 +171,21 @@ function editprofile()
 								<div class="form-group">
 									<label class="col-lg-3 control-label">First name:</label>
 									<div class="col-lg-8">
-										<input class="form-control" id="firstname" type="text">
+										<input class="form-control" id="firstname" type="text" required="required">
 									</div>
 								</div>
 
 								<div class="form-group">
 									<label class="col-lg-3 control-label">Last name:</label>
 									<div class="col-lg-8">
-										<input class="form-control" id="lastname" type="text">
+										<input class="form-control" id="lastname" type="text" required="required">
 									</div>
 								</div>
 
 								<div class="form-group">
 									<label class="col-lg-3 control-label">Password</label>
 									<div class="col-lg-8">
-										<input class="form-control" id="password" type="password">
+										<input class="form-control" id="password" type="password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" required="required">
 									</div>
 								</div>
 
@@ -192,7 +193,7 @@ function editprofile()
 								<div class="form-group">
 									<label class="col-lg-3 control-label">Role</label>
 									<div class="radio-inline">
-										<label><input type="radio" name="role" value="regular">Regular
+										<label><input type="radio" name="role" value="regular" >Regular
 											Employee.</label>
 									</div>
 

@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.apache.log4j.Logger;
 import org.asu.ss.model.BackendResponse;
+import org.asu.ss.model.InternalUser;
 import org.asu.ss.model.PasswordReset;
 import org.asu.ss.service.IntService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,26 +45,40 @@ public class IntController {
 		return new ResponseEntity<BackendResponse>(response, HttpStatus.OK);
 	}
 	@RequestMapping(value = "/admin/reqret", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<List<PasswordReset>> retrieveRequest() {
+	public ResponseEntity<BackendResponse> retrieveRequest() {
+		BackendResponse response = new BackendResponse();
+
 		log.info("Entered IntController:retrieveRequest");
 		List<PasswordReset> reqlist;
 		reqlist = intService.retrieveRequest();
 		if(reqlist.isEmpty()){
-			return new ResponseEntity<List<PasswordReset>>(HttpStatus.METHOD_FAILURE);
+			response.setStatus(BackendResponse.FAILURE);
+			response.setError("Raise request failed !!");
+			return new ResponseEntity<BackendResponse>(response, HttpStatus.OK);
 		}
+		response.setData(reqlist);
+		System.out.println(reqlist);
 		log.debug("Exit IntController:retrieveRequest");
-		return new ResponseEntity<List<PasswordReset>>(reqlist,HttpStatus.OK);
+		response.setStatus(BackendResponse.SUCCESS);
+		return new ResponseEntity<BackendResponse>(response, HttpStatus.OK);
 		
 	}
-	
-	@RequestMapping(value = "/admin/approveresreq", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<Void> approveRequest(@RequestBody PasswordReset pwdres) {
-		
-		boolean success = intService.approveRequest(pwdres);
-		if(!success){
-			return new ResponseEntity<Void>(HttpStatus.METHOD_FAILURE);
+	@RequestMapping(value = "/intuser/approveReject", method = RequestMethod.POST)
+	public ResponseEntity<BackendResponse> approveReq(@RequestBody PasswordReset pwdres) {
+		System.out.println("Inside approveReq");
+		//log.info("Entered AdminController.deleteEmployee with value: "+pwdres.getE_id());
+		BackendResponse response = new BackendResponse();
+		//pwdres.setFlag(true);
+		boolean status = intService.approveRequest(pwdres);
+		if(!status){
+			response.setStatus(BackendResponse.FAILURE);
+			response.setError("Employee Deletion failed !!");
+			log.error("Exit AdminController.deleteEmployee failed with value: "+response.toString());
+			return new ResponseEntity<BackendResponse>(response, HttpStatus.OK);
 		}
-		return new ResponseEntity<Void>(HttpStatus.OK);
+		response.setStatus(BackendResponse.SUCCESS);
+		log.info("Exit AdminController.deleteEmployee succeded with value: "+response.toString());
+		return new ResponseEntity<BackendResponse>(response, HttpStatus.OK);
 	}
 	
 }
