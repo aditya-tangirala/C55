@@ -130,8 +130,6 @@ function csrfsafe(xhr)
 		<span>Type of User: </span>
 		<select id="actor">
 			<option value="Customer" label="Customer" />
-			<option value="Employee" label="Employee" />
-			<option value="Merchant" label="Merchant" />
 		</select>
 		<br/>
 		<span>Mode: </span>

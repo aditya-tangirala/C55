@@ -22,6 +22,15 @@
 <link href="/C55-Backend/assets/css/simple-sidebar.css" rel="stylesheet">
 
 <script src="/C55-Backend/assets/js/jquery.min.js"></script>
+<link href="/C55-Backend/assets/css/keyboard.css" rel="stylesheet"></link>
+<script src="/C55-Backend/assets/js/jquery.keyboard.js" ></script>
+<script src="/C55-Backend/assets/js/jquery-ui.min.js" ></script>
+
+<script>
+$(function(){
+$('#custid').keyboard();//bind keyboard to field
+});
+</script>
 
 
 <script type="text/javascript">
@@ -112,8 +121,6 @@
 		<span>Type of User: </span>
 		<select id="actor">
 			<option value="Customer" label="Customer" />Customer</option>
-			<option value="Employee" label="Employee" />Merchant</option>
-			<option value="Merchant" label="Merchant" />Employee</option>
 		</select>
 		<br/>
 		<span>Mode: </span>

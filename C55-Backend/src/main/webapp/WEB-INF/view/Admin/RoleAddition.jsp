@@ -594,16 +594,16 @@
 								required="required">
 						</div>
 						<div class="form-group">
-							<label for="password">Password</label> <input type="password"
+							<label for="password">Password (Alphanumeric and Special Characters Allowed $@_.! )</label> <input type="password"
 								class="form-control" id="password"
-								pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
-								required="required">
+								pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])[a-zA-Z0-9$@_.!]{8,20}"
+								placeholder="Password should be 8-20. One Caps and one small with special characters" required="required">
 						</div>
 						<div class="form-group">
-							<label for="password1">Confirm Password</label> <input
+							<label for="password1">Confirm Password (Alphanumeric and Special Characters Allowed $@_.! )</label> <input
 								type="password" class="form-control" id="password1"
-								pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
-								required="required" onchange="validPass()">
+								pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])[a-zA-Z0-9$@_.!]{8,20}"
+								placeholder="Password should be 8-20. One Caps and one small with special characters" required="required" onchange="validPass()">
 						</div>
 						<div class="form-group">
 							<label for="email">Email address:</label> <input type="email"

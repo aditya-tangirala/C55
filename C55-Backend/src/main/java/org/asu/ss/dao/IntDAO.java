@@ -67,7 +67,7 @@ public class IntDAO {
 		Transaction transaction = session.beginTransaction();
 		List<PasswordReset> reqlist = new ArrayList<PasswordReset>();
 		try{
-			reqlist= (List<PasswordReset>) session.createSQLQuery("select * from ResetRequest where flag = 0").list();	
+			reqlist= (List<PasswordReset>) session.createSQLQuery("select * from resetrequest where flag = 0").list();	
 		}catch(Exception e){
 			e.printStackTrace();
 		}

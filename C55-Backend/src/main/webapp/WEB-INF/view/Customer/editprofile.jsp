@@ -528,9 +528,9 @@ saurabh start
 <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
 
 									<div class="form-group">
-										<label class="col-md-3 control-label">New Password:</label>
+										<label class="col-md-3 control-label">New Password:password:(Special Characters Allowed $@_.! )</label>
 										<div class="col-md-8">
-											<input class="form-control" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
+											<input class="form-control" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])[a-zA-Z0-9$@_.!]{8,20}"
 											  name="password" id="new_password" placeholder="Password should be 8-32. One Caps and one small with special characters"
 												type="password">
 										</div>
@@ -538,9 +538,9 @@ saurabh start
 
 									<div class="form-group">
 										<label class="col-md-3 control-label">Confirm
-											password:</label>
+											password:(Special Characters Allowed $@_.! )</label>
 										<div class="col-md-8">
-											<input class="form-control"  pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
+											<input class="form-control"  pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])[a-zA-Z0-9$@_.!]{8,20}"
 											  name="confrim_password" placeholder="Password should be 8-32. One Caps and one small with special characters"
 												id="confirmpassword" onkeyup="checkPasswordMatch()"
 												type="password">

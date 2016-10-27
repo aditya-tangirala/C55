@@ -192,7 +192,7 @@ public class AdminDAO {
 
 	public String readLogs(String logDate) {
 		System.out.println(logDate);
-		String path=System.getProperty("catalina.home");
+		String path=System.getProperty("catalina.base");
 		System.out.println(path);
 		String fileName=path+"/logs/C55Backend"+logDate+".log";
 

@@ -62,7 +62,7 @@ TrustLogo("https://c55.mobicloud.asu.edu/comodo_secure_seal_113x59_transp.png", 
 						<label><b>Username/Email</b></label>
 						<form:input path="uname" required="required" pattern="[A-Za-z0-9@.]{1,50}" />
 						<br /> <label><b>Password</b></label>
-						<form:password path="pass" required="required" placeholder="(Alphanumeric and @#$% allowed)" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"/>
+						<form:password path="pass" required="required" placeholder="(Alphanumeric and @#$% allowed)" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])[a-zA-Z0-9$@_.!]{8,20}"/>
 						<br /> <input type="submit" value="Login" />
 					</div>
 				</form:form>

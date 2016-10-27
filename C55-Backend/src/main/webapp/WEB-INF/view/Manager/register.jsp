@@ -458,8 +458,8 @@ function createUserAccount(){
 				</div>
 				
 				<div class="form-group">
-					<label for="password">Password (Alphanumeric and @#$% allowed)</label>
-					<input type="password" class="form-control" id="pass" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"  placeholder="Password should be 8-32. One Caps and one small with special characters" required>
+					<label for="password">Password (Alphanumeric and Special Characters Allowed $@_.! )</label>
+					<input type="password" class="form-control" id="pass" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])[a-zA-Z0-9$@_.!]{8,20}"  placeholder="Password should be 8-20. One Caps and one small with special characters" required>
 				</div>
 				
 				<div class="form-group">
