@@ -106,12 +106,13 @@ public class Admin {
 		this.last_login_time = last_login_time;
 		this.trusted_devices = trusted_devices;
 	}
-	@Override
+	
+	/*@Override
 	public String toString() {
 		return "Admin [e_id=" + e_id + ", password=" + password + ", f_name=" + f_name + ", l_name=" + l_name
 				+ ", email=" + email + ", mobile=" + mobile + ", last_login_time=" + last_login_time
 				+ ", trusted_devices=" + trusted_devices + "]";
-	}
+	}*/
 	
 	
 }

@@ -27,11 +27,12 @@ public class BackendResponse {
 	public void setStatus(String status) {
 		this.status = status;
 	}
-	@Override
+	
+	/*@Override
 	public String toString() {
 		return "BackendResponse [status=" + status + ", error=" + error + ", data=" + data+ "]";
 
-	}
+	}*/
 	
 	
 	

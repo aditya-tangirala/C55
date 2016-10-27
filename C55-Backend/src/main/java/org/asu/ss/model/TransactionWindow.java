@@ -27,10 +27,10 @@ public class TransactionWindow {
 	public void setAcc_no(long acc_no) {
 		this.acc_no = acc_no;
 	}
-	@Override
+	/*@Override
 	public String toString() {
 		return "TransactionWindow [startDate=" + startDate + ", endDate=" + endDate + "]";
-	}
+	}*/
 	
 	
 }

@@ -106,10 +106,10 @@ public class TempTransaction {
 		this.otp_value = otp_value;
 	}
 
-	@Override
+	/*@Override
 	public String toString() {
 		return "TempTransaction [id=" + id + ", cust_id=" + cust_id + ", email=" + email + ", otp_value=" + otp_value
 				+ ", mobile_carrier=" + mobile_carrier + ", mobile=" + mobile + ", item=" + item + "]";
-	}
+	}*/
 	
 }

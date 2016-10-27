@@ -29,10 +29,11 @@ public class CreditCardBalance {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	@Override
+	
+	/*@Override
 	public String toString() {
 		return "CreditCardBalance [cust_id=" + cust_id + ", balance=" + balance + "]";
-	}
+	}*/
 	
 	
 

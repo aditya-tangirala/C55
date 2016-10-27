@@ -71,11 +71,11 @@ public class Account {
 		this.creation_date = creation_date;
 	}
 	
-	@Override
+	/*@Override
 	public String toString() {
 		return "Account [acc_no=" + acc_no + ", type=" + type + ", acc_balance=" + acc_balance + ", creation_date="
 				+ creation_date + "]";
-	}
+	}*/
 
 
 }

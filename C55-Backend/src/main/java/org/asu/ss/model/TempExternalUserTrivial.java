@@ -92,11 +92,11 @@ public class TempExternalUserTrivial {
 		this.password = password;
 	}
 
-	@Override
+	/*@Override
 	public String toString() {
 		return "TempExternalUserTrivial [cust_id=" + cust_id + ", f_name=" + f_name + ", password=" + password
 				+ ", l_name=" + l_name + ", address=" + address + ", item=" + item + "]";
-	}
+	}*/
 	
 	
 }

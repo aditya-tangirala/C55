@@ -81,11 +81,11 @@ public class QuickPay {
 		this.remarks = remarks;
 	}
 
-	@Override
+	/*@Override
 	public String toString() {
 		return "QuickPay [from_acc=" + from_acc + ", to_acc=" + to_acc + ", t_id=" + t_id + ", t_amount=" + t_amount
 				+ ", email=" + email + ", mobile=" + mobile + ", remarks=" + remarks + "]";
-	}
+	}*/
 	
 	
 }

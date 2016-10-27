@@ -199,12 +199,12 @@ public class Transaction {
 		this.email = email;
 	}
 
-	@Override
+	/*@Override
 	public String toString() {
 		return "Transaction [t_id=" + t_id + ", from_acc=" + from_acc + ", to_acc=" + to_acc + ", t_custid=" + t_custid
 				+ ", t_timestamp=" + t_timestamp + ", t_amount=" + t_amount + ", remarks=" + remarks + ", severity="
 				+ severity + ", t_status=" + t_status + ", otp_status=" + otp_status + ", otp_id=" + otp_id
 				+ ", otp_value=" + otp_value + ", mobile=" + mobile + ", email=" + email + "]";
-	}
+	}*/
 	
 }

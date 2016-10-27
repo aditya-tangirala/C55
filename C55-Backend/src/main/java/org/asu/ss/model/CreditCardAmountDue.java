@@ -23,10 +23,10 @@ public class CreditCardAmountDue {
 		// TODO Auto-generated constructor stub
 	}
 
-	@Override
+	/*@Override
 	public String toString() {
 		return "CreditCardAmountDue [amtdue=" + amtdue + "]";
-	}
+	}*/
 	
 	
 	

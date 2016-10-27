@@ -120,11 +120,11 @@ public class TempExternalUser {
 
 	}
 
-	@Override
+	/*@Override
 	public String toString() {
 		return "TempExternalUser [id=" + id + ", cust_id=" + cust_id + ", email=" + email + ", otp_value=" + otp_value
 				+ ", mobile_carrier=" + mobile_carrier + ", mobile=" + mobile + ", item=" + item + "]";
-	}
+	}*/
 	
 	
 	

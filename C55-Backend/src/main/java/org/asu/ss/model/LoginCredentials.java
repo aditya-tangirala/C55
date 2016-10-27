@@ -28,10 +28,11 @@ public class LoginCredentials {
 	public LoginCredentials() {
 		super();
 	}
-	@Override
+	
+	/*@Override
 	public String toString() {
 		return "LoginCredentials [username=" + username + ", password=" + password + "]";
-	}
+	}*/
 	
 	
 }

@@ -122,12 +122,12 @@ public class OTP {
 		this.email = email;
 	}
 
-	@Override
+	/*@Override
 	public String toString() {
 		return "OTP [otp_id=" + otp_id + ", c_id=" + c_id + ", otp_value=" + otp_value + ", mobile=" + mobile
 				+ ", opt_ts=" + opt_ts + ", otp_purpose=" + otp_purpose + ", email=" + email + ", mobile_carrier="
 				+ mobile_carrier + "]";
-	}
+	}*/
 
 	
 }

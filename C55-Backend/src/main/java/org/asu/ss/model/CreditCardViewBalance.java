@@ -62,11 +62,12 @@ public class CreditCardViewBalance {
 	public void setAmount_used(double amount_used) {
 		this.amount_used = amount_used;
 	}
-	@Override
+	
+	/*@Override
 	public String toString() {
 		return "CreditCardViewBalance [cust_id=" + cust_id + ", balance=" + balance + ", credit_limit=" + credit_limit
 				+ ", amount_used=" + amount_used + "]";
-	}
+	}*/
 	
 	
 }

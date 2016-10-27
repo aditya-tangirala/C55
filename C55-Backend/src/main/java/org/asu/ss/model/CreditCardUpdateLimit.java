@@ -29,10 +29,11 @@ public class CreditCardUpdateLimit {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	@Override
+	
+	/*@Override
 	public String toString() {
 		return "CreditCardUpdateLimit [ccno=" + ccno + ", newlimit=" + newlimit + "]";
-	}
+	}*/
 
 	
 }

@@ -117,12 +117,12 @@ public class ObjecttoUI {
 		this.message = message;
 	}
 
-	@Override
+	/*@Override
 	public String toString() {
 		return "ObjecttoUI [id=" + id + ", cust_id=" + cust_id + ", email=" + email + ", otp_value=" + otp_value
 				+ ", mobile_carrier=" + mobile_carrier + ", mobile=" + mobile + ", item=" + item + ", message="
 				+ message + "]";
-	}
+	}*/
 	
 	
 	

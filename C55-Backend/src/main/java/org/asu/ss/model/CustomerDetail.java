@@ -24,9 +24,9 @@ public class CustomerDetail {
 		this.cust_id = cust_id;
 	}
 
-	@Override
+	/*@Override
 	public String toString() {
 		return "CustomerDetail [cust_id=" + cust_id + "]";
-	}
+	}*/
 	
 }

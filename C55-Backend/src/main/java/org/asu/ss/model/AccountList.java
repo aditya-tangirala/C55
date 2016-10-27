@@ -34,10 +34,10 @@ public class AccountList {
 		// TODO Auto-generated constructor stub
 	}
 
-	@Override
+	/*@Override
 	public String toString() {
 		return "AccountList [acc_no=" + acc_no + "]";
-	}
+	}*/
 	
 
 }

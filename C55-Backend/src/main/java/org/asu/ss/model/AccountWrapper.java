@@ -35,9 +35,9 @@ public class AccountWrapper {
 		this.type = type;
 	}
 
-	@Override
+	/*@Override
 	public String toString() {
 		return "AccountWrapper [cust_id=" + cust_id + ", acc_balance=" + acc_balance + ", type=" + type + "]";
-	}
+	}*/
 	
 }

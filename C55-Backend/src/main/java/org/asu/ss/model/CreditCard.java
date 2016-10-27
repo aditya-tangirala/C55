@@ -170,13 +170,13 @@ public class CreditCard {
 		this.amount_spent = amount_spent;
 	}
 
-	@Override
+	/*@Override
 	public String toString() {
 		return "CreditCard [acc_no=" + acc_no + ", cust_id=" + cust_id + ", card_no=" + card_no + ", cvv=" + cvv
 				+ ", issue_date=" + issue_date + ", expiry_date=" + expiry_date + ", card_name=" + card_name
 				+ ", cardtype=" + cardtype + ", credit_limit=" + credit_limit + ", amount_used=" + amount_used
 				+ ", interest_rate=" + interest_rate + ", amount_spent=" + amount_spent + "]";
-	}
+	}*/
 	
 	
 

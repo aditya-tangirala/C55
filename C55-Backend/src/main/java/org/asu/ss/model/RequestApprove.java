@@ -33,10 +33,10 @@ public class RequestApprove {
 		// TODO Auto-generated constructor stub
 	}
 
-	@Override
+	/*@Override
 	public String toString() {
 		return "RequestApprove [custid=" + custid + ", flag=" + flag + "]";
-	}
+	}*/
 	
 	
 
