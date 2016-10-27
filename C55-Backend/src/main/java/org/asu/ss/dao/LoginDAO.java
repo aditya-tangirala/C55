@@ -80,14 +80,17 @@ public class LoginDAO {
 					extUser.setLogin_counter(counter_value);
 					session.update(extUser);
 					sysTransaction.commit();
+					
 				}
 				return extUser;
 			}
 			
-			session.close();
-
 		} catch (Exception e) {
 			sysTransaction.rollback();
+			
+		}
+		finally
+		{
 			session.close();
 		}
 		return extUser;

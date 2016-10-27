@@ -40,8 +40,10 @@ public class AdminDAO {
 				return true;
 			}catch(Exception e){
 				transaction.rollback();
-				session.close();
 				return false;
+			}
+			finally{
+				session.close();
 			}
 		}
 		return false;
@@ -87,6 +89,7 @@ public class AdminDAO {
 				System.out.println("AdminDAO.updateEmployeeRecord() after : "+empDb.getPassword());
 				session.update(empDb);
 				transaction.commit();
+				session.close();
 				return true;
 			}catch(Exception e){
 				transaction.rollback();
@@ -109,6 +112,7 @@ public class AdminDAO {
 				empDb.setSsn(employee.getSsn());
 				session.update(empDb);
 				transaction.commit();
+				session.close();
 				return true;
 			}catch(Exception e){
 				transaction.rollback();
@@ -127,6 +131,7 @@ public class AdminDAO {
 			try{
 				session.delete(internalUser);
 				transaction.commit();
+				session.close();
 				return true;
 			}catch(Exception e){
 				transaction.rollback();

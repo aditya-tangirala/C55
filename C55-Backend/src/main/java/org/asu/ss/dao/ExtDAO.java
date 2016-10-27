@@ -39,6 +39,7 @@ public class ExtDAO {
 				long cust_id = (Long)session.save(externaluser);
 				transaction.commit();
 				ExternalUser extreturn = findUserById(cust_id);
+				session.close();
 				return extreturn;
 			} catch (Exception e) {
 				transaction.rollback();
@@ -70,7 +71,7 @@ public class ExtDAO {
 			transaction.commit();
 		} catch (Exception e) {
 			System.out.println("Here it is" + e);
-			transaction.commit();
+			transaction.rollback();
 		} finally {
 			session.close();
 		}
@@ -86,6 +87,7 @@ public class ExtDAO {
 			try {
 				session.delete(extUser);
 				transaction.commit();
+				session.close();
 				return true;
 			} catch (Exception e) {
 				transaction.rollback();

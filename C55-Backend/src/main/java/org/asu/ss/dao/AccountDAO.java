@@ -199,15 +199,15 @@ public class AccountDAO {
 			else{
 				return null;
 			}
-			session.close();
 		}catch(Exception e){
 			if(!transaction.wasCommitted()){
-				transaction.commit();
-			}
-			if(session.isOpen()){
-			session.close();
+				transaction.rollback();
 			}
 			return null;
+		}
+		finally
+		{
+			session.close();
 		}
 		
 		

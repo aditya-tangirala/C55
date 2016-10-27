@@ -47,11 +47,12 @@ public class IntDAO {
 			res=(Long)session.save(pwdres);
 			if(res!=0){
 				transaction.commit();
+				session.close();
 			}
 		}catch(Exception e)
 		{
 			if(!transaction.wasCommitted()){
-				transaction.commit();
+				transaction.rollback();
 			}
 			if(session.isOpen()){
 			session.close();
@@ -69,6 +70,10 @@ public class IntDAO {
 			reqlist= (List<PasswordReset>) session.createSQLQuery("select * from ResetRequest where flag = 0").list();	
 		}catch(Exception e){
 			e.printStackTrace();
+		}
+		finally
+		{
+			session.close();
 		}
 		return reqlist;
 	}
@@ -134,12 +139,17 @@ public class IntDAO {
 		{
 			e.printStackTrace();
 			if(!transaction.wasCommitted()){
-				transaction.commit();
+				transaction.rollback();
 			}
 			if(session.isOpen()){
 			session.close();
 			}
 			return false;
+		}
+		finally{
+			if(session.isOpen()){
+				session.close();
+				}
 		}
 		return true;
 	}

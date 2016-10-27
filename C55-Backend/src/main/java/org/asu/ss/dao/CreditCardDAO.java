@@ -115,6 +115,7 @@ public class CreditCardDAO {
 			Double due = cc.getAmount_used()+int1+int2+fine;
 			if(cctrans.getT_amt()!=Math.ceil(due))
 				{
+				session.close();
 				return 0;
 				}
 			Double new_bal=0.0;
@@ -136,7 +137,7 @@ public class CreditCardDAO {
 
 		}catch(Exception e){
 			if(!transaction.wasCommitted()){
-				transaction.commit();
+				transaction.rollback();
 			}
 			if(session.isOpen()){
 			session.close();
@@ -232,6 +233,7 @@ public class CreditCardDAO {
 			transaction.commit();
 			}
 			else{
+				session.close();
 				return null;
 			}
 			session.close();
@@ -351,8 +353,8 @@ public class CreditCardDAO {
 			query.setParameter("purchase", "purchase");
 			query.setParameter("remark", euser.getOrg_name());
 			reqlist=query.list();
+			session.close();
 			return reqlist;
-
 		}catch(Exception e){
 			log.error("Exit CreditCardController.retrieveTransactionRequests failed ");
 

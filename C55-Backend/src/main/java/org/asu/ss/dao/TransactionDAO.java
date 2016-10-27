@@ -308,6 +308,9 @@ public class TransactionDAO {
 		{
 			e.printStackTrace();
 			sysTransaction.commit();
+		}
+		finally
+		{
 			session.close();
 		}
 		return trans_list;
