@@ -204,6 +204,8 @@ public class AdminDAO {
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+			st = "Log file not found.";
+			return st;
 		}
 		catch (Exception e) {
 			// TODO Auto-generated catch block
