@@ -12,6 +12,8 @@
 	content="width=device-width, shrink-to-fit=no, initial-scale=1">
 <meta name="description" content="">
 <meta name="author" content="">
+<meta name="_csrf" content="${_csrf.token}"/>
+<meta name="_csrf_header" content="${_csrf.headerName}"/>
 
 <title>C55 Bank</title>
 
@@ -35,27 +37,21 @@ $('#custid').keyboard();//bind keyboard to field
 
 <script type="text/javascript">
 
+function noBack() { window.history.forward(); }
+
+function csrfsafe(xhr)
+{
+	var token = $("meta[name='_csrf']").attr("content");
+	var header = $("meta[name='_csrf_header']").attr("content");
+	xhr.setRequestHeader(header, token);
+	}
+
     function forgetPassword()
 {
-    	var user = document.getElementById("actor").value;
     	var mode = document.getElementById("mode").value;
     	var cust_id = document.getElementById("custid").value;
     	alert(user +" " + mode +" " + cust_id +" ");
     	var postdata;
-		if(user=="Employee")
-			{
-			if(mode=="Mobile")
-				{
-	    	postdata = '{  "item": "'+document.getElementById("mode").value+'",\
-			"email": "'+document.getElementById("custid").value+'"}';
-				}
-			else
-				{
-		    	postdata = '{ "item": "'+document.getElementById("mode").value+'",\
-				"email": "'+document.getElementById("custid").value+'"}';			}
-			}
-		else
-			{
 			if(mode=="Mobile")
 			{
 			postdata = '{  "item": "'+document.getElementById("mode").value+'",\
@@ -73,6 +69,11 @@ $('#custid').keyboard();//bind keyboard to field
                 url: "${home}support/request",  
                 data: postdata,
                 contentType: "application/json; charset=utf-8",
+                beforeSend: function(xhr) {
+    	            // here it is
+    	            csrfsafe(xhr);
+    				//	xhr.setRequestHeader(header, token);
+    	        },
                 success: function(data,status){
                 	console.log(data);
               	  if(status == "success"){
@@ -102,12 +103,14 @@ $('#custid').keyboard();//bind keyboard to field
                }
            }
 
-				})
+				});
 			}
-		window.location = "/";
 
-    
+		//window.location = "/";
+
+
 }
+    window.onload=noBack;
 </script>
 
 </head>
@@ -120,18 +123,19 @@ $('#custid').keyboard();//bind keyboard to field
 		<form onsubmit="forgetPassword()">
 		<span>Type of User: </span>
 		<select id="actor">
-			<option value="Customer" label="Customer" />Customer</option>
+			<option value="Customer" label="Customer" />
 		</select>
 		<br/>
 		<span>Mode: </span>
 		<select id="mode">
-			<option value="Email" label="Email" />Email</option>
-			<option value="Mobile" label="Mobile" />Mobile</option>
+			<option value="Email" label="Email" />
+			<option value="Mobile" label="Mobile"/>
 		</select>
 		<br/>
 		<span>CustomerId/Email: (CustomerId if Customer/Merchant and Email if Employee) </span>
 		<input id="custid" type="text" pattern="[a-zA-Z0-9]{1,15}" required>
 		<button type="submit" value="Submit">Submit</button>
+		</form>
 		</div>
 	</div>
 </body>

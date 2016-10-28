@@ -53,7 +53,7 @@ public class LoginController {
 	public String custAccounts(HttpServletRequest request) {
 		System.out.println("Accounts");
 		HttpSession session = request.getSession(false);
-		if (session.getAttribute("custId")!=null) {
+		if (null != session && session.getAttribute("custId")!=null) {
 			System.out.println("valid session");
 			//HttpSession session = request.getSession(false);
 			System.out.println(session.getId());
@@ -67,7 +67,7 @@ public class LoginController {
 	public String merchantAccounts(HttpServletRequest request) {
 		System.out.println("Accounts");
 		HttpSession session = request.getSession(false);
-		if (session.getAttribute("custId")!=null) {
+		if (null != session && session.getAttribute("custId")!=null) {
 			System.out.println("valid session");
 			//HttpSession session = request.getSession(false);
 			System.out.println(session.getId());
@@ -81,7 +81,7 @@ public class LoginController {
 	public String EmpAccounts(HttpServletRequest request) {
 		System.out.println("Employee");
 		HttpSession session = request.getSession(false);
-		if (session.getAttribute("custId")!=null) {
+		if (null != session && session.getAttribute("custId")!=null) {
 			System.out.println("valid session");
 			//HttpSession session = request.getSession(false);
 			System.out.println(session.getId());
@@ -95,7 +95,7 @@ public class LoginController {
 	public String ManagerAccounts(HttpServletRequest request) {
 		System.out.println("Manager");
 		HttpSession session = request.getSession(false);
-		if (session.getAttribute("custId")!=null) {
+		if (null != session && session.getAttribute("custId")!=null) {
 			System.out.println("valid session");
 			//HttpSession session = request.getSession(false);
 			System.out.println(session.getId());
@@ -109,7 +109,7 @@ public class LoginController {
 	public String adminAccounts(HttpServletRequest request) {
 		System.out.println("Admin");
 		HttpSession session = request.getSession(false);
-		if (session.getAttribute("custId")!=null) {
+		if (null != session && session.getAttribute("custId")!=null) {
 			System.out.println("valid session");
 			//HttpSession session = request.getSession(false);
 			System.out.println(session.getId());

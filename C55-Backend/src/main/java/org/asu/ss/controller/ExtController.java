@@ -63,7 +63,7 @@ public class ExtController {
 		System.out.println("Reached Backend");
 		TempExternalUser tempexternaluser = new TempExternalUser();
 
-		HttpSession session = request.getSession(true);
+		HttpSession session = request.getSession(false);
 		System.out.println(session.getId());
 		long user_id = (long) session.getAttribute("custId");
 		System.out.println("HI bro!"+ user_id);
@@ -184,7 +184,7 @@ public class ExtController {
 
 		System.out.println("AccountController.getAccountsList()");
 
-		HttpSession session = request.getSession(true);
+		HttpSession session = request.getSession(false);
 		System.out.println(session.getId());
 		List<Account> accounts = new ArrayList<Account>();
 

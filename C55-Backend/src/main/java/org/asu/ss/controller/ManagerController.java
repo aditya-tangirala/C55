@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 		public String testLink4(HttpServletRequest request) {
 			System.out.println("In testLink3");
 			HttpSession session = request.getSession(false);
-			if (session.getAttribute("custId")!=null)
+			if (null != session && session.getAttribute("custId")!=null)
 				return "Manager/editprofile";
 			else
 				return "redirect:/";
@@ -24,7 +24,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 			System.out.println("In testLink3");
 			HttpSession session = request.getSession(false);
-			if (session.getAttribute("custId")!=null)
+			if (null != session && session.getAttribute("custId")!=null)
 				return "Manager/register";
 			else
 				return "redirect:/";
@@ -33,7 +33,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 		public String testLink6(HttpServletRequest request) {
 			System.out.println("In testLink3");
 			HttpSession session = request.getSession(false);
-			if (session.getAttribute("custId")!=null)
+			if (null != session && session.getAttribute("custId")!=null)
 				return "Manager/transfercash";
 			else
 				return "redirect:/";
@@ -43,7 +43,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 		public String testLink7(HttpServletRequest request) {
 			System.out.println("In testLink3");
 			HttpSession session = request.getSession(false);
-			if (session.getAttribute("custId")!=null)
+			if (null != session && session.getAttribute("custId")!=null)
 				return "Manager/deleteprofile";
 			else
 				return "redirect:/";
@@ -52,7 +52,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 		public String testLink8(HttpServletRequest request) {
 			System.out.println("In testLink3");
 			HttpSession session = request.getSession(false);
-			if (session.getAttribute("custId")!=null)
+			if (null != session && session.getAttribute("custId")!=null)
 				return "Manager/request";
 			else
 				return "redirect:/";

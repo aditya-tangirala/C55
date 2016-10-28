@@ -68,9 +68,10 @@ public class CreditCardService {
 		return creditCardDAO.retrieveTransactionRequest(custId);
 	}
 
-	public boolean approveTransactionRequests(RequestApprove reqapp) {
+	public boolean approveTransactionRequests(Transaction transaction) {
 		log.info("Entering CreditCardService.approveTransactionRequests()");
-		return creditCardDAO.approveTransactionRequest(reqapp);
+		
+		return creditCardDAO.approveTransactionRequest(transaction);
 	}
 
 

@@ -38,26 +38,11 @@ function csrfsafe(xhr)
 	}
 
     function forgetPassword()
-{	
-    	var user = document.getElementById("actor").value;
+{
     	var mode = document.getElementById("mode").value;
     	var cust_id = document.getElementById("custid").value;
     	alert(user +" " + mode +" " + cust_id +" ");
     	var postdata;
-		if(user=="Employee")
-			{
-			if(mode=="Mobile")
-				{
-	    	postdata = '{  "item": "'+document.getElementById("mode").value+'",\
-			"email": "'+document.getElementById("custid").value+'"}';
-				}
-			else
-				{
-		    	postdata = '{ "item": "'+document.getElementById("mode").value+'",\
-				"email": "'+document.getElementById("custid").value+'"}';			}
-			}
-		else
-			{
 			if(mode=="Mobile")
 			{
 			postdata = '{  "item": "'+document.getElementById("mode").value+'",\
@@ -138,11 +123,11 @@ function csrfsafe(xhr)
 			<option value="Mobile" label="Mobile"/>
 		</select>
 		<br/>
-		<span>CustomerId: </span>
+		<span>CustomerId/Email:</span>
 		<input id="custid" type="text" pattern="[a-zA-Z0-9]{1,15}" required>
 		<button type="submit" value="Submit">Submit</button>
+		<span>Account has been locked for the user. Check your Email/Mobile for new password</span>
 		</form>
-		<span>Account has been locked. An email or Message will be sent to you with changed password</span>
 		</div>
 	</div>
 </body>

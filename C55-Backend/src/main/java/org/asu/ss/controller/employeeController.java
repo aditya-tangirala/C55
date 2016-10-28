@@ -17,7 +17,7 @@ public class employeeController {
 	public String testLink4(HttpServletRequest request) {
 		log.info("Entering employeeController.testLink4 ");
 		HttpSession session = request.getSession(false);
-		if (session.getAttribute("custId")!=null){
+		if (null != session && session.getAttribute("custId")!=null){
 			log.info("Exit employeeController.testLink4 if");
 		return "Employee/editprofile";
 		}
@@ -30,7 +30,7 @@ public class employeeController {
 	public String testLink5(HttpServletRequest request) {
 		log.info("Entering employeeController.testLink5 ");
 		HttpSession session = request.getSession(false);
-		if (session.getAttribute("custId")!=null){
+		if (null != session && session.getAttribute("custId")!=null){
 			log.info("Exiting employeeController.testLink5 if");
 		return "Employee/register";}
 		else{
@@ -41,7 +41,7 @@ public class employeeController {
 	public String testLink6(HttpServletRequest request) {
 		log.info("Entering employeeController.testLink6 ");
 		HttpSession session = request.getSession(false);
-		if (session.getAttribute("custId")!=null){
+		if (null != session && session.getAttribute("custId")!=null){
 			log.info("Exiting employeeController.testLink6 if");
 		return "Employee/transfercash";}
 		else{
@@ -53,7 +53,7 @@ public class employeeController {
 	public String testLink7(HttpServletRequest request) {
 		log.info("Entering employeeController.testLink7 ");
 		HttpSession session = request.getSession(false);
-		if (session.getAttribute("custId")!=null){
+		if (null != session && session.getAttribute("custId")!=null){
 			log.info("Exiting employeeController.testLink7 if");
 		return "Employee/deleteprofile";}
 		else{
@@ -64,7 +64,7 @@ public class employeeController {
 	@RequestMapping(value = "Employee/request")
 	public String testLink8(HttpServletRequest request) {
 		HttpSession session = request.getSession(false);
-		if (session.getAttribute("custId")!=null)
+		if (null != session && session.getAttribute("custId")!=null)
 			return "Employee/request";
 		else
 		return "redirect:/";

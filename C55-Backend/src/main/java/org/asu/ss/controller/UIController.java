@@ -28,7 +28,7 @@ public class UIController {
 	public String transfercustomer(HttpServletRequest request) {
 		System.out.println("tcash");
 		HttpSession session = request.getSession(false);
-		if (session.getAttribute("custId")!=null) {
+		if (null != session && session.getAttribute("custId")!=null) {
 			String trans = (String)session.getAttribute("tranSuccess");
 			if(trans!= null && trans.equals("Success")){
 				session.setAttribute("tranSuccess", "done");
@@ -45,7 +45,7 @@ public class UIController {
 	@RequestMapping(value = "Customer/balanceinfo")
 	public String transferAccounts(HttpServletRequest request) {
 		HttpSession session = request.getSession(false);
-		if (session.getAttribute("custId")!=null)
+		if (null != session && session.getAttribute("custId")!=null) 
 			return "Customer/balanceinfo";
 		else
 		return "redirect:/";
@@ -53,7 +53,7 @@ public class UIController {
 	@RequestMapping(value = "Customer/creditcard")
 	public String transferCreditCard(HttpServletRequest request) {
 		HttpSession session = request.getSession(false);
-		if (session.getAttribute("custId")!=null)
+		if (null != session && session.getAttribute("custId")!=null) 
 			return "Customer/creditcard";
 		else
 			return "redirect:/";	 
@@ -61,7 +61,7 @@ public class UIController {
 	@RequestMapping(value = "Customer/editprofile")
 	public String transferEditProfile(HttpServletRequest request) {
 		HttpSession session = request.getSession(false);
-		if (session.getAttribute("custId")!=null)
+		if (null != session && session.getAttribute("custId")!=null) 
 			return "Customer/editprofile";
 		else
 			return "redirect:/";	 
@@ -70,7 +70,7 @@ public class UIController {
 	public String transferAccount(Model model, HttpServletRequest request) {
 		System.out.println("UIController.transferAccount()");
 		HttpSession session = request.getSession(false);
-		if (session.getAttribute("custId")!=null)
+		if (null != session && session.getAttribute("custId")!=null) 
 			return "Customer/accounts";
 		else
 		return "redirect:/";	 
@@ -78,7 +78,7 @@ public class UIController {
 	@RequestMapping(value = "Customer/request")
 	public String transferRequest(HttpServletRequest request, Model model) {
 		HttpSession session = request.getSession(false);
-		if (session.getAttribute("custId")!=null) {
+		if (null != session && session.getAttribute("custId")!=null) { 
 			model.addAttribute("OTPDetails", new OTPDetails());
 			return "Customer/request";
 		} else
@@ -87,7 +87,7 @@ public class UIController {
 	@RequestMapping(value = "Customer/notification")
 	public String transferNotification(HttpServletRequest request) {
 		HttpSession session = request.getSession(false);
-		if (session.getAttribute("custId")!=null)
+		if (null != session && session.getAttribute("custId")!=null) 
 			return "Customer/notification";
 		else
 		return "redirect:/";	 
@@ -96,7 +96,7 @@ public class UIController {
 	public String transferViewProfile(HttpServletRequest request) {
 		System.out.println("UIController.transferViewProfile()");
 		HttpSession session = request.getSession(false);
-		if (session.getAttribute("custId")!=null)
+		if (null != session && session.getAttribute("custId")!=null) 
 			return "Customer/viewprofile";
 		else
 		return "redirect:/";	 
@@ -105,7 +105,7 @@ public class UIController {
 	public String transferAccount2(HttpServletRequest request) {
 		System.out.println("UIController.transferAccount2()");
 		HttpSession session = request.getSession(false);
-		if (session.getAttribute("custId")!=null)
+		if (null != session && session.getAttribute("custId")!=null) 
 			return "Customer/accounts";
 		else
 		return "redirect:/";	 
@@ -115,7 +115,7 @@ public class UIController {
 	@RequestMapping(value = "Customer/checkOTP")
 	public String transferOTP(@ModelAttribute("OTPDetails") OTPDetails otpDetails, HttpServletRequest request, Model model) {
 		HttpSession session = request.getSession(false);
-		if (session.getAttribute("custId")!=null) {
+		if (null != session && session.getAttribute("custId")!=null) { 
 			if(!(otpDetails.getEmailId().length()==0))
 				session.setAttribute("emailId", otpDetails.getEmailId());
 			if(!(otpDetails.getStatus().length()==0))
@@ -132,7 +132,7 @@ public class UIController {
 			return "redirect:/Customer/request";
 		}
 		HttpSession session = request.getSession(false);
-		if (session.getAttribute("custId")!=null) {
+		if (null != session && session.getAttribute("custId")!=null) { 
 			if(!(otpDetails.getEmailId().length()==0))
 				session.setAttribute("emailId", otpDetails.getEmailId());
 			if(!(otpDetails.getStatus().length()==0))
@@ -155,7 +155,7 @@ public class UIController {
 	@RequestMapping(value = "profile/declineupdate")
 	public String declineServiceRequest(HttpServletRequest request) {
 		HttpSession session = request.getSession(false);
-		if(session.getAttribute("custId")!=null){
+		if (null != session && session.getAttribute("custId")!=null) {
 		TempExternalUser tempexternaluser = new TempExternalUser();
 		tempexternaluser.setCust_id((long)session.getAttribute("custId"));
 		tempexternaluser.setId((long)session.getAttribute("Otp_Id"));
@@ -173,7 +173,7 @@ public class UIController {
 		@RequestMapping(value = {"Customer/profile/approveupdate"}, method = RequestMethod.POST)
 		public String validateOTP(@ModelAttribute ("transferOtp") TempExternalUser tempexternaluser,HttpServletRequest request, Model model) {
 			HttpSession session = request.getSession(false);
-			if (session.getAttribute("custId")!=null){
+			if (null != session && session.getAttribute("custId")!=null) {
 			tempexternaluser.setId((long)session.getAttribute("Otp_Id"));
 			tempexternaluser.setCust_id((long)session.getAttribute("custId"));
 			tempexternaluser.setItem((String)session.getAttribute("item"));
@@ -194,7 +194,7 @@ public class UIController {
 	@RequestMapping(value="Customer/transfer/otp", method=RequestMethod.POST)
 	public String otpTransfer(@ModelAttribute ("transferOtp") Transaction transaction, HttpServletRequest request)
 	{	HttpSession session = request.getSession(false);
-	if (session.getAttribute("custId")!=null){
+	if (null != session && session.getAttribute("custId")!=null) {
 		BackendResponse backendResponse = new BackendResponse();
 		transaction.setOtp_id((long)session.getAttribute("Otp_Id"));
 		transaction.setT_id((long)session.getAttribute("TransID"));

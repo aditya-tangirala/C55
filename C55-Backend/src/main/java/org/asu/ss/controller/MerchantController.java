@@ -74,7 +74,7 @@ public class MerchantController {
 	@RequestMapping(value = "Merchant/balanceinfo")
 	public String balanceinfoMerchant(HttpServletRequest request) {
 		HttpSession session = request.getSession(false);
-		if (session.getAttribute("custId")!=null)
+		if (null != session && session.getAttribute("custId")!=null)
 			return "Merchant/balanceinfo";
 		else
 		return "redirect:/";
@@ -82,7 +82,7 @@ public class MerchantController {
 	@RequestMapping(value = "Merchant/accounts")
 	public String accountsMerchant(HttpServletRequest request) {
 		HttpSession session = request.getSession(false);
-		if (session.getAttribute("custId")!=null)
+		if (null != session && session.getAttribute("custId")!=null)
 			return "Merchant/accounts";
 		else
 		return "redirect:/";
@@ -90,7 +90,7 @@ public class MerchantController {
 	@RequestMapping(value = "Merchant/editprofile")
 	public String editprofileMerchant(HttpServletRequest request) {
 		HttpSession session = request.getSession(false);
-		if (session.getAttribute("custId")!=null)
+		if (null != session && session.getAttribute("custId")!=null)
 			return "Merchant/editprofile";
 		else
 		return "redirect:/";
@@ -98,7 +98,7 @@ public class MerchantController {
 	@RequestMapping(value = "Merchant/request")
 	public String requestMerchant(HttpServletRequest request) {
 		HttpSession session = request.getSession(false);
-		if (session.getAttribute("custId")!=null)
+		if (null != session && session.getAttribute("custId")!=null)
 			return "Merchant/request";
 		else
 		return "redirect:/";
@@ -106,7 +106,7 @@ public class MerchantController {
 	@RequestMapping(value = "Merchant/viewprofile")
 	public String viewprofileMerchant(HttpServletRequest request) {
 		HttpSession session = request.getSession(false);
-		if (session.getAttribute("custId")!=null)
+		if (null != session && session.getAttribute("custId")!=null)
 			return "Merchant/viewprofile";
 		else
 		return "redirect:/";

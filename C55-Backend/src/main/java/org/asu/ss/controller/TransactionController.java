@@ -386,7 +386,7 @@ public class TransactionController {
 		return new ResponseEntity<BackendResponse>(backendResponse, HttpStatus.OK);
 	}
 	
-	@RequestMapping(value={"/transfer/pay","/Customer/transfer/pay"}, method=RequestMethod.POST, produces=MediaType.APPLICATION_JSON_VALUE)
+	@RequestMapping(value={"/transfer/pay","Customer/transfer/pay"}, method=RequestMethod.POST, produces=MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<BackendResponse> payMerchant(@RequestBody Transaction transaction, HttpServletRequest request)
 	{
 		/*
@@ -398,6 +398,7 @@ public class TransactionController {
 		 */
 		HttpSession session = request.getSession(false);		
 		long user_id = (long) session.getAttribute("custId");
+		transaction.setT_custid(user_id);
 		BackendResponse backendResponse = new BackendResponse();
 		try
 		{

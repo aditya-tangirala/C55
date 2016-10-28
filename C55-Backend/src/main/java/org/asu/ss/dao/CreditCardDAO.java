@@ -350,7 +350,7 @@ public class CreditCardDAO {
 			query.setParameter("custid", custId);
 			ExternalUser euser= (ExternalUser) query.uniqueResult();
 			query= session.createQuery("from Transaction where t_status=:purchase and remarks=:remark");
-			query.setParameter("purchase", "purchase");
+			query.setParameter("purchase", "purchased");
 			query.setParameter("remark", euser.getOrg_name());
 			reqlist=query.list();
 			session.close();
@@ -365,24 +365,60 @@ public class CreditCardDAO {
 		return reqlist;
 	}
 
-	public boolean approveTransactionRequest(RequestApprove reqapp) {
+	public boolean approveTransactionRequest(org.asu.ss.model.Transaction cc_transaction) {
 		Session session = sessionFactory.openSession();
 		Transaction transaction = session.beginTransaction();
-		log.info("Enter CreditCardController.approveTransactionRequests with values: "+reqapp.toString());
+		log.info("Enter CreditCardController.approveTransactionRequests with values: "+cc_transaction.toString());
 		try{
-			Query query= session.createQuery("DELETE Transaction where t_custid = :custid");
-			query.setParameter("custid", reqapp.getCustid());
-			query.executeUpdate();
-			transaction.commit();
-			session.close();
+			Query query= session.createQuery("UPDATE Transaction set t_status = :t_status where t_id = :t_id");
+			query.setParameter("t_id", cc_transaction.getT_id());
+			query.setParameter("t_status", "SUBMITTED");
+			int qstatus=query.executeUpdate();
+			if(qstatus!=0)
+			{	query= session.createQuery("from Transaction where t_id =:t_id");
+				query.setParameter("t_id", cc_transaction.getT_id());
+				org.asu.ss.model.Transaction trans=(org.asu.ss.model.Transaction)query.uniqueResult();
+				query= session.createQuery("from ExternalUser where org_name =:org_name");
+				query.setParameter("org_name",trans.getRemarks() );
+				ExternalUser vendor=(ExternalUser)query.uniqueResult();
+				query= session.createQuery("from Account where acc_no =:acc_no");
+				query.setParameter("acc_no", vendor.getAcc_no1());
+				Account account=(Account)query.uniqueResult();
+				Double new_bal=account.getAcc_balance()+trans.getT_amount();
+				query= session.createQuery("UPDATE Account set acc_balance = :acc_balance where acc_no = :acc_no");
+				query.setParameter("acc_balance", new_bal);
+				query.setParameter("acc_no", account.getAcc_no());
+				int status=query.executeUpdate();
+				transaction.commit();
+				if(session.isOpen()){
+					session.close();
+					}
+				if(status==0)
+					return false;
+				else
+					return true;
+			}
+			else{
+				transaction.rollback();
+				if(session.isOpen()){
+					session.close();
+					}
+				}
 
 		}catch(Exception e){
+			e.printStackTrace();
 			log.error("Exit CreditCardController.approveTransactionRequests failed ");
 			try{
 				transaction.rollback();
+				if(session.isOpen()){
+					session.close();
+					}
 			}catch(Exception e1)
 			{
 				log.error("CreditCardController.approveTransactionRequests rollback failed");
+				if(session.isOpen()){
+					session.close();
+					}
 			}
 			if(session.isOpen()){
 			session.close();
@@ -399,7 +435,15 @@ public class CreditCardDAO {
 		org.asu.ss.model.CreditCard creditCardFromDB;
 
 		try {
-			creditCardFromDB = (org.asu.ss.model.CreditCard)session.get(org.asu.ss.model.CreditCard.class, creditCard.getCust_id());
+			List creditCards = null;
+			Query eusersQuery = session.createQuery("FROM " + org.asu.ss.model.CreditCard.class.getName() + " ee where ee.cust_id= :cust_id");
+			eusersQuery.setParameter("cust_id", creditCard.getCust_id());
+			creditCards = eusersQuery.list();
+			creditCardFromDB = (CreditCard)creditCards.get(0);
+			
+			
+			
+			//creditCardFromDB = (org.asu.ss.model.CreditCard)session.get(org.asu.ss.model.CreditCard.class, creditCard.getCust_id());
 			creditCardFromDB.setAmount_spent(creditCard.getAmount_spent());
 			creditCardFromDB.setAmount_used(creditCard.getAmount_used());
 			session.update(creditCardFromDB);

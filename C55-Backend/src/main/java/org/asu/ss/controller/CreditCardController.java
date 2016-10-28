@@ -7,6 +7,7 @@ import javax.servlet.http.HttpSession;
 
 import org.apache.log4j.Logger;
 import org.asu.ss.model.AccountList;
+import org.asu.ss.model.BackendResponse;
 import org.asu.ss.model.CreditCard;
 import org.asu.ss.model.CreditCardAmountDue;
 import org.asu.ss.model.CreditCardBalance;
@@ -123,33 +124,40 @@ public class CreditCardController {
 		return new ResponseEntity<Void>(HttpStatus.OK);
 
 	}
-	@RequestMapping(value = "/merchant/transreq", method = RequestMethod.POST,produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<List<Transaction>> retrieveTransactionRequests(HttpServletRequest request) {
+	@RequestMapping(value = "Merchant/transreq", method = RequestMethod.POST,produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<BackendResponse> retrieveTransactionRequests(HttpServletRequest request) {
+		BackendResponse bc = new BackendResponse();
 		HttpSession session = request.getSession(false);
 		long custid=(long)session.getAttribute("custId");
 		log.info("Enter CreditCardController.retrieveTransactionRequests with values: "+custid);
 		List<Transaction> translist;
 		translist = creditCardService.retrieveTransactionRequests(custid);
-		if(translist.isEmpty() == true){
-			log.error("Exiting CreditCardController.retrieveTransactionRequests failed ");
-			return new ResponseEntity<List<Transaction>>(HttpStatus.OK);
-		}
+		bc.setStatus(BackendResponse.SUCCESS);
+		bc.setData(translist);
+		//if(translist.isEmpty() == true){
+		//	log.error("Exiting CreditCardController.retrieveTransactionRequests failed ");
+		//	return new ResponseEntity<List<Transaction>>(HttpStatus.OK);
+		//}
 		log.info("Exiting CreditCardController.retrieveTransactionRequests successful");
-		return new ResponseEntity<List<Transaction>>(translist,HttpStatus.OK);
+		
+		return new ResponseEntity<BackendResponse>(bc,HttpStatus.OK);
 
 	}
 
-	@RequestMapping(value = "/merchant/appreq", method = RequestMethod.POST)
-	public ResponseEntity<Void> approveTransactionRequests(@RequestBody RequestApprove reqapp) {
-		log.info("Enter CreditCardController.retrieveTransactionRequests with values: "+reqapp.toString());
+	@RequestMapping(value = "Merchant/appreq", method = RequestMethod.POST)
+	public ResponseEntity<BackendResponse> approveTransactionRequests(@RequestBody Transaction transaction) {
+		BackendResponse bc = new BackendResponse();
+		log.info("Enter CreditCardController.retrieveTransactionRequests with values: "+transaction.toString());
 		boolean success;
-		success=creditCardService.approveTransactionRequests(reqapp);
+		success=creditCardService.approveTransactionRequests(transaction);
+		bc.setStatus(BackendResponse.SUCCESS);
 		if(success == false){
+			bc.setStatus(BackendResponse.FAILURE);
 			log.error("Exiting CreditCardController.retrieveTransactionRequests failed ");
-			return new ResponseEntity<Void>(HttpStatus.NOT_FOUND);
+			return new ResponseEntity<BackendResponse>(HttpStatus.NOT_FOUND);
 		}
 		log.info("Exiting CreditCardController.retrieveTransactionRequests successful");
-		return new ResponseEntity<Void>(HttpStatus.OK);
+		return new ResponseEntity<BackendResponse>(HttpStatus.OK);
 
 	}
 
