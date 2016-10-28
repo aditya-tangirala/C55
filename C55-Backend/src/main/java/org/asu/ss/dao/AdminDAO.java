@@ -194,7 +194,7 @@ public class AdminDAO {
 		System.out.println(logDate);
 		String path=System.getProperty("catalina.base");
 		System.out.println(path);
-		String fileName=path+"/logs/C55Backend"+logDate+".log";
+		String fileName=path+"/logs/C55Backend.log"+logDate+".";
 
 		String st = null;
 		try {
