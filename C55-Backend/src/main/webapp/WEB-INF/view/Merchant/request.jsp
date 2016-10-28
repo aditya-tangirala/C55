@@ -51,7 +51,7 @@ noBack();
 $.ajax({
     type: "POST",
     //dataType: "json",
-    url: "${home}/merchant/transreq",
+    url: "${home}transreq",
     //data: 'name='+name+'&lastname='+ lastName,//{myData:dataString},
     //contentType: "application/json; charset=utf-8",
     async:false,
@@ -81,7 +81,7 @@ $.ajax({
     {
 
     	var gE1="<button onclick='approve(";
-    	var gE2=")'>View </button>";
+    	var gE2=")'>Approve</button>";
 
 
     	var table=[];
@@ -89,8 +89,9 @@ $.ajax({
     		{
     		var row=[];
     		row[0]=dataSet[i].t_custid;
-    		row[1]=dataSet[i].t_amount;
-    		row[2]=gE1+i+gE2;
+    		row[1]= dataSet[i].t_id;
+    		row[2]=dataSet[i].t_amount;
+    		row[3]=gE1+i+gE2;
     		table[i]=row;
     		}
     	return table;
@@ -134,13 +135,15 @@ $.ajax({
 		if (confirm('Are you sure?')) {
 			var postdata =
 	        {
-	        	"t_custid"	: allData[r].t_custid
+	        	"t_custid":allData[r].t_custid,
+	        	"t_id":allData[r].t_id
 	        }
         var dataString = JSON.stringify(postdata);
+			alert(dataString);
         $.ajax({
             type: "POST",
             dataType: "json",
-            url: "${home}merchant/appreq", //url in AdminController(RestController)
+            url: "${home}appreq", //url in AdminController(RestController)
             data: dataString,
             contentType: "application/json; charset=utf-8",
             beforeSend: function(xhr) {
@@ -160,7 +163,7 @@ $.ajax({
 		}
 	}
 
-window.onload=getAllEmployees();
+window.onload=getAllEmployees;
 </script>
 </head>
 <body>
@@ -198,8 +201,8 @@ window.onload=getAllEmployees();
 				<thead>
 					<tr>
 						<th>Customer ID</th>
+						<th>Transaction Id</th>
 						<th>Amount</th>
-
 						<th>Approve</th>
 
 					</tr>
