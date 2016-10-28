@@ -215,7 +215,7 @@
                 $.ajax({
                 	type: "POST",
                 	dataType: "json",
-                	url: "${home}card/purchase",
+                	url: "${home}transfer/pay",
                 	data: {myData:dataString},
                 	contentType: "application/json; charset=utf-8",
 			beforeSend: function(xhr) {
