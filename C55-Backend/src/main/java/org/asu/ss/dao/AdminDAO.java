@@ -32,9 +32,9 @@ public class AdminDAO {
 
 		if(employee != null){
 			try{
-				System.out.println("AdminDAO.saveEmployeeRecord() before : "+employee.getPassword());
+			//	System.out.println("AdminDAO.saveEmployeeRecord() before : "+employee.getPassword());
 				employee.setPassword(new String(hash(employee.getPassword())));
-				System.out.println("AdminDAO.saveEmployeeRecord() after : "+employee.getPassword());
+			//	System.out.println("AdminDAO.saveEmployeeRecord() after : "+employee.getPassword());
 				session.save(employee);
 				transaction.commit();
 				return true;
@@ -84,9 +84,9 @@ public class AdminDAO {
 				empDb.setAccess_level(employee.getAccess_level());
 				empDb.setF_name(employee.getF_name());
 				empDb.setL_name(employee.getL_name());
-				System.out.println("AdminDAO.updateEmployeeRecord() employee.getPassword() before "+employee.getPassword());
+				//System.out.println("AdminDAO.updateEmployeeRecord() employee.getPassword() before "+employee.getPassword());
 				empDb.setPassword(new String(hash(employee.getPassword())));
-				System.out.println("AdminDAO.updateEmployeeRecord() after : "+empDb.getPassword());
+				//System.out.println("AdminDAO.updateEmployeeRecord() after : "+empDb.getPassword());
 				session.update(empDb);
 				transaction.commit();
 				session.close();

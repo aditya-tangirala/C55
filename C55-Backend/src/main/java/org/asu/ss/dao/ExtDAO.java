@@ -32,9 +32,9 @@ public class ExtDAO {
 		System.out.println("Reached Backend");
 		if (externaluser != null) {
 			try {
-				System.out.println("ExtDAO.saveExternalUser() externaluser.getPassword() before : "+externaluser.getPassword());
+			//	System.out.println("ExtDAO.saveExternalUser() externaluser.getPassword() before : "+externaluser.getPassword());
 				externaluser.setPassword(new String(hash(externaluser.getPassword())));
-				System.out.println("ExtDAO.saveExternalUser() after : "+externaluser.getPassword());
+			//	System.out.println("ExtDAO.saveExternalUser() after : "+externaluser.getPassword());
 				
 				long cust_id = (Long)session.save(externaluser);
 				transaction.commit();
@@ -193,9 +193,9 @@ public class ExtDAO {
 					updateExternalUserDB.setAddress(permanentupdateprofile.getAddress());
 				} else if (updatedItem.equals("Password")) {
 					updateExternalUserDB.setLogin_counter(0);
-					System.out.println(permanentupdateprofile.getPassword() + " is the Password");
+				//	System.out.println(permanentupdateprofile.getPassword() + " is the Password");
 					String pwd = new String(hash(permanentupdateprofile.getPassword()));
-					System.out.println("ExtDAO.permanentUpdatetoDb() pwd : "+pwd);
+				//	System.out.println("ExtDAO.permanentUpdatetoDb() pwd : "+pwd);
 					updateExternalUserDB.setPassword(pwd);
 				}
 				session.update(updateExternalUserDB);

@@ -108,7 +108,7 @@ public class AdminHomeController {
 				e.printStackTrace();
 			}
 			// String json = gson.toJson(intUser);
-			System.out.println(json);
+			//System.out.println(json);
 			modView.addObject("internalUser", json);
 
 			modView.setViewName("Admin/PII");
@@ -142,7 +142,7 @@ public class AdminHomeController {
 				e.printStackTrace();
 			}
 			// String json = gson.toJson(intUser);
-			System.out.println(json);
+			// System.out.println(json);
 			modView.addObject("internalUser", json);
 
 			modView.setViewName("Admin/ViewModifyEmpl");
@@ -159,7 +159,7 @@ public class AdminHomeController {
 		log.info("Entering AdminHomeController.accessLogs");
 		HttpSession session = request.getSession(false);
 		if (null != session && session.getAttribute("custId") != null) {
-			System.out.println("In accessLogs");
+			// System.out.println("In accessLogs");
 			return "Admin/AccessLog";
 		} else
 			return "redirect:/";

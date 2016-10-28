@@ -37,7 +37,7 @@ public class OTPProviderFactory {
 			e.printStackTrace();
 		}
 		catch (NullPointerException e) {
-			System.out.println("Error is:"+e);
+			// System.out.println("Error is:"+e);
 			e.printStackTrace();
 		}
 

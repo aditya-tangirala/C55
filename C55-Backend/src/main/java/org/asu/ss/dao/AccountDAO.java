@@ -35,8 +35,8 @@ public class AccountDAO {
 	public Account saveAccount(Account account) {
 		Session session = sessionFactory.openSession();
 		Transaction transaction = session.beginTransaction();
-		System.out.println("HERE:" + account.getAcc_no() + account.getType() + account.getAcc_balance()
-				+ account.getCreation_date());
+	//	System.out.println("HERE:" + account.getAcc_no() + account.getType() + account.getAcc_balance()
+		//		+ account.getCreation_date());
 		try {
 			long accno = (long) session.save(account);
 			transaction.commit();	
@@ -56,8 +56,8 @@ public class AccountDAO {
 		long acc_no = 0;
 		Account acc;
 
-		System.out.println("HERE:" + account.getAcc_no() + account.getType() + account.getAcc_balance()
-				+ account.getCreation_date());
+	//	System.out.println("HERE:" + account.getAcc_no() + account.getType() + account.getAcc_balance()
+		//		+ account.getCreation_date());
 		try {
 			acc = (Account)session.get(Account.class, account.getAcc_no());
 			if (acc.getAcc_no() == account.getAcc_no())
@@ -108,7 +108,7 @@ public class AccountDAO {
 			query.setParameter("startDate", format.parse(start_date));
 			query.setParameter("endDate", format.parse(end_date));
 			query.setParameter("accNo", transactionWindow.getAcc_no());
-			System.out.println(transactionWindow.getAcc_no());
+			// System.out.println(transactionWindow.getAcc_no());
 			transactions = query.list();			
 			transaction.commit();
 			session.close();

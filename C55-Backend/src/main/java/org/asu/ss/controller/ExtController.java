@@ -64,9 +64,9 @@ public class ExtController {
 		TempExternalUser tempexternaluser = new TempExternalUser();
 
 		HttpSession session = request.getSession(false);
-		System.out.println(session.getId());
+		// System.out.println(session.getId());
 		long user_id = (long) session.getAttribute("custId");
-		System.out.println("HI bro!"+ user_id);
+		// System.out.println("HI bro!"+ user_id);
 		tempexternaluser.setCust_id(user_id);
 		BackendResponse backendResponse = new BackendResponse();
 		TempExternalUser retTuple= extService.findTupleById(tempexternaluser.getCust_id());
@@ -185,14 +185,14 @@ public class ExtController {
 		System.out.println("AccountController.getAccountsList()");
 
 		HttpSession session = request.getSession(false);
-		System.out.println(session.getId());
+		//System.out.println(session.getId());
 		List<Account> accounts = new ArrayList<Account>();
 
 		long user_id = (long) session.getAttribute("custId");
-		System.out.println("HI bro!"+ user_id);
+		//System.out.println("HI bro!"+ user_id);
 		tempexternalusertrivial.setCust_id(user_id);
-		System.out.println("The Values are :"+ tempexternalusertrivial.getAddress()+tempexternalusertrivial.getItem()+tempexternalusertrivial.getCust_id());
-		System.out.println("The Values are :"+ tempexternalusertrivial.getPassword()+tempexternalusertrivial.getItem()+tempexternalusertrivial.getCust_id());
+		//System.out.println("The Values are :"+ tempexternalusertrivial.getAddress()+tempexternalusertrivial.getItem()+tempexternalusertrivial.getCust_id());
+		//System.out.println("The Values are :"+ tempexternalusertrivial.getPassword()+tempexternalusertrivial.getItem()+tempexternalusertrivial.getCust_id());
 		try {
 
 			response = extService.permanentUpdateCustomerProfileTrivial(tempexternalusertrivial,
@@ -262,7 +262,7 @@ public class ExtController {
 	        }
 	        backendResponse.setStatus("Success");
 	        backendResponse.setData(retUser);
-	        System.out.println(((ExternalUser)backendResponse.getData()).getF_name()+":"+((ExternalUser)backendResponse.getData()).getL_name()+":"+((ExternalUser)backendResponse.getData()).getAddress());
+	        //System.out.println(((ExternalUser)backendResponse.getData()).getF_name()+":"+((ExternalUser)backendResponse.getData()).getL_name()+":"+((ExternalUser)backendResponse.getData()).getAddress());
 	        return new ResponseEntity<BackendResponse>(backendResponse, HttpStatus.OK);
 	    }
 

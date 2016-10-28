@@ -31,7 +31,7 @@ public class OneTime
 		try {
 			for (int i = 0; i < 10; i++)
 			{
-				System.out.println(OneTime.generate(secret, "" + 2, 6, "hotp"));
+				//System.out.println(OneTime.generate(secret, "" + 2, 6, "hotp"));
 				Thread.sleep(1000);
 			}
 		} catch (Exception e) {
@@ -43,9 +43,9 @@ public class OneTime
 	{
 		OneTime otp = new OneTime();
 		//otp.testTOTP();
-		System.out.println("\n");
-		System.out.println("\n");
-		System.out.println("\n");
+		//System.out.println("\n");
+		//System.out.println("\n");
+		//System.out.println("\n");
 		otp.testHOTP();
 	}
 }

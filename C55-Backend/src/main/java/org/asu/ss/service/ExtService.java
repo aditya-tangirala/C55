@@ -262,7 +262,7 @@ public class ExtService {
 			System.out.println("The address is changed to" + tempexternaluserT.getAddress());
 			permanentupdateprofileTrivial.setAddress(tempexternaluserT.getAddress());
 		}else if (updatedItemTrivial.equals("Password")) {
-			System.out.println("The Password is changed to" + tempexternaluserT.getPassword());
+		//	System.out.println("The Password is changed to" + tempexternaluserT.getPassword());
 			permanentupdateprofileTrivial.setPassword(tempexternaluserT.getPassword());
 		}
 			this.extDAO.permanentUpdatetoDb(permanentupdateprofileTrivial, updatedItemTrivial);

@@ -494,7 +494,7 @@ function createUserAccount(){
 
 				<div class="form-group">
 					<label for="Apt name">Address:</label>
-					<input type="text" class="form-control" id="address"  pattern="[a-zA-Z0-9.-\s]" required>
+					<input type="text" class="form-control" id="address" required>
 				</div>
 				
 

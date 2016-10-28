@@ -55,9 +55,9 @@ public class LoginDAO {
 			user_type="person";
 		ExternalUser extUser = null; // Is returning Null fine ?
 		try {
-			System.out.println("LoginDAO.getExtUser() before : "+password);
+		//	System.out.println("LoginDAO.getExtUser() before : "+password);
 			password = new String(hash(password));
-			System.out.println("LoginDAO.getExtUser() after : "+password);
+		//	System.out.println("LoginDAO.getExtUser() after : "+password);
 			Query query = session.createQuery("from ExternalUser where username = :username and password = :password and user_type = :user_type");
 			query.setParameter("username", username);
 			query.setParameter("password", password);
@@ -112,9 +112,9 @@ public class LoginDAO {
 			custType="regular";
 		InternalUser intUser = null; // Is returning Null fine ?
 		try {
-			System.out.println("LoginDAO.getIntUser() before : "+password);
+		//	System.out.println("LoginDAO.getIntUser() before : "+password);
 			password = new String(hash(password));
-			System.out.println("LoginDAO.getIntUser() after : "+password);
+		//	System.out.println("LoginDAO.getIntUser() after : "+password);
 			Query query = session.createQuery("from InternalUser where email = :username and password = :password and access_level = :access_level");
 			query.setParameter("username", username);
 			query.setParameter("password", password);

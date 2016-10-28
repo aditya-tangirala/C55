@@ -109,9 +109,9 @@ public class IntDAO {
 				iu=(InternalUser) query.uniqueResult();
 				long temppassword = (long) (Math.random() * 100000000L);
 				String pwd = Long.toString(temppassword) + "$%&)";
-				System.out.println("IntDAO.approveRequest() before : "+pwd);
+			//	System.out.println("IntDAO.approveRequest() before : "+pwd);
 				String pwd1 = new String(hash(pwd));
-				System.out.println("IntDAO.approveRequest() after : "+pwd1);
+			//	System.out.println("IntDAO.approveRequest() after : "+pwd1);
 				query = session.createQuery("UPDATE InternalUser set password= :pwd where e_id = :eid");
 				query.setParameter("pwd", pwd1);
 				query.setParameter("eid", pwdres.getEid());
@@ -120,7 +120,7 @@ public class IntDAO {
 					return false;
 					}
 				SendMail sm= new SendMail();
-				System.out.println("Email: "+iu.getEmail()+"Password: "+temppassword);
+			//	System.out.println("Email: "+iu.getEmail()+"Password: "+temppassword);
 				sm.sendMail(iu.getEmail(), pwd);
 				query= session.createQuery("delete PasswordReset where e_id = :eid");
 				query.setParameter("eid",pwdres.getEid());
