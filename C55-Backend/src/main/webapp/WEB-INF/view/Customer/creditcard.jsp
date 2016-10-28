@@ -203,7 +203,7 @@
             	{
             //"cc_id": 123123123123
             "card_no":document.getElementById("mp_cc_number").value,
-            "pay_amount":document.getElementById("amount_t1").value,
+            "pay_amount":document.getElementById("amount_t3").value,
             "cvv":document.getElementById("cvv").value,
             "exp_date": document.getElementById("expdate").value,
             "merchant":document.getElementById("merchant").value,
@@ -218,6 +218,10 @@
                 	url: "${home}card/purchase",
                 	data: {myData:dataString},
                 	contentType: "application/json; charset=utf-8",
+			beforeSend: function(xhr) {
+        	            // here it is
+        	            csrfsafe(xhr);
+        	        },
                 	success: function(data,status){
                 		if(status=="success"){
                 			alert("Purchase request has been made ");
