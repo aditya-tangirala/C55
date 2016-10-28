@@ -90,8 +90,8 @@ public class CreditCard {
 		this.issue_date = issue_date;
 	}
 
-	public Date getExpiry_date() {
-		return expiry_date;
+	public String getExpiry_date() {
+		return expiry_date.toString();
 	}
 
 	public void setExpiry_date(Date expiry_date) {

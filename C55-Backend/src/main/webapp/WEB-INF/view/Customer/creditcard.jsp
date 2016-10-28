@@ -129,6 +129,8 @@
                   document.getElementById("mp_cc_number").innerHTML="Card Number: "+ccStr;
                   document.getElementById("mp_cc_value").innerHTML="Amount Spent: $"+responsedata['amount_spent'].toString();
                   document.getElementById("mp_cc_aggregrate").innerHTML="Amount Due: $"+responsedata['amount_used'].toString();
+                  document.getElementById("mp_cc_cvv").innerHTML="CVV: "+ responsedata['cvv'].toString();
+                  document.getElementById("mp_cc_expiry").innerHTML="Expiry Date: "+ responsedata['expiry_date'].toString();
                   //document.getElementById("mp_cc_interest").innerHTML=responsedata['interest_amount'].toString();
 
                   //document.getElementById("mp_cc_late").innerHTML=responsedata['late_fee'].toString();
@@ -465,7 +467,7 @@ saurabh start
   				<div class="alert alert-info alert-dismissable">
   					<a class="panel-close close" data-dismiss="alert">�</a>
   					<i class="fa fa-coffee"></i>
-  					<strong id="mp_cc_number"></strong><div id="mp_cust_id"></div><div id="mp_cc_value"></div><div id="mp_cc_aggregrate"></div>
+  					<strong id="mp_cc_number"></strong><div id="mp_cust_id"></div><div id="mp_cc_value"></div><div id="mp_cc_aggregrate"></div><div id="mp_cc_cvv"></div><div id="mp_cc_expiry"></div>
   				</div>
 
   				<form class="form-horizontal" role="form" method="POST" onsubmit="makepayment()">
