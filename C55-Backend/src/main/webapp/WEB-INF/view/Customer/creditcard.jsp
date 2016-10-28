@@ -199,14 +199,10 @@
             		return false;
             	}
 
-            	var postdata =
+            var postdata =
             	{
-            //"cc_id": 123123123123
-            "card_no":document.getElementById("mp_cc_number").value,
-            "pay_amount":document.getElementById("amount_t3").value,
-            "cvv":document.getElementById("cvv").value,
-            "exp_date": document.getElementById("expdate").value,
-            "merchant":document.getElementById("merchant").value,
+            "t_amount":document.getElementById("amount_t3").value,
+            "remarks":document.getElementById("merchant").value,
 			'${_csrf.parameterName}':"${_csrf.token}"
         }
         var dataString = JSON.stringify(postdata);
