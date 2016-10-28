@@ -22,7 +22,7 @@ public class OneTime
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			return("X@"+totp+"&z%");
+			return("X@"+totp+"z%");
 		}
 
 	public void testHOTP() {
