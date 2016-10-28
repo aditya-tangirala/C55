@@ -267,7 +267,7 @@ public class ExtController {
 	    }
 
 	// To add new external user
-	@RequestMapping(value ={"/Employee/externaluser/create","/Manager/externaluser/create"}, method = RequestMethod.POST)
+	@RequestMapping(value ={"Employee/externaluser/create","Manager/externaluser/create"}, method = RequestMethod.POST)
 	public ResponseEntity<BackendResponse> addUser(@RequestBody ExternalUser externalUser, UriComponentsBuilder ucb) {
 
 		BackendResponse backendResponse = new BackendResponse();
