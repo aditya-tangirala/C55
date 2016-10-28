@@ -257,7 +257,8 @@ function selfaccount()
 			console.log(status);
 			if(responsedata.status=="Success"){
 			alert("Success");
-			}
+			}else
+				alert("Insufficient funds");
 		},
 		error: function(jqXHR, exception) {
 		          alert("Failure");
@@ -589,7 +590,7 @@ $.ajax({
 				<div id="quickpay" class="tab-pane fade ">
 						
 						<div  class="alert alert-info alert-dismissable">
-							<a class="panel-close close" data-dismiss="alert">×</a> 
+							<a class="panel-close close" data-dismiss="alert">Ã—</a> 
 							<i class="fa fa-coffee"></i>
 							<strong>Transaction Status</strong><div id="pt_status" ></div>
 						</div>
@@ -660,7 +661,7 @@ $.ajax({
 						<div id="self" class="tab-pane fade in active">
 
 							<div  class="alert alert-info alert-dismissable">
-							<a class="panel-close close" data-dismiss="alert">×</a> 
+							<a class="panel-close close" data-dismiss="alert">Ã—</a> 
 							<i class="fa fa-coffee"></i>
 							<strong>Transaction Status:</strong><div id="st_status" ></div>
 						</div>
@@ -723,7 +724,7 @@ $.ajax({
 					<div id="other" class="tab-pane fade ">
 						
 						<div  class="alert alert-info alert-dismissable">
-							<a class="panel-close close" data-dismiss="alert">×</a> 
+							<a class="panel-close close" data-dismiss="alert">Ã—</a> 
 							<i class="fa fa-coffee"></i>
 							<strong>Transaction Status</strong><div id="qt_status" ></div>
 						</div>
