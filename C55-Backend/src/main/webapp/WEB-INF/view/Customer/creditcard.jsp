@@ -216,7 +216,7 @@
                 	type: "POST",
                 	dataType: "json",
                 	url: "${home}transfer/pay",
-                	data: {myData:dataString},
+                	data: dataString,
                 	contentType: "application/json; charset=utf-8",
 			beforeSend: function(xhr) {
         	            // here it is
