@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans:beans xmlns="http://www.springframework.org/schema/mvc"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:beans="http://www.springframework.org/schema/beans"
+	xmlns:context="http://www.springframework.org/schema/context" xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd  
+  http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd  
+  http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd  
+  http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.0.xsd">
+
+	<annotation-driven />
+
+	<resources mapping="/assets/**" location="/assets/" />
+
+	<beans:bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource"
+		destroy-method="close">
+		<beans:property name="driverClassName" value="com.mysql.jdbc.Driver" />
+		<beans:property name="url"
+			value="jdbc:mysql://localhost:3306/c55" />
+		<beans:property name="username" value="c55" />
+		<beans:property name="password" value="jaffa" />
+
+	</beans:bean>
+
+	<!-- Hibernate 4 SessionFactory Bean definition -->
+	<beans:bean id="hibernate4AnnotatedSessionFactory"
+		class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
+		<beans:property name="dataSource" ref="dataSource" />
+		<beans:property name="annotatedClasses">
+			<beans:list>
+				<beans:value>org.asu.ss.model.Account</beans:value>
+				<beans:value>org.asu.ss.model.Admin</beans:value>
+				<beans:value>org.asu.ss.model.CreditCard</beans:value>
+				<beans:value>org.asu.ss.model.ExternalUser</beans:value>
+				<beans:value>org.asu.ss.model.InternalUser</beans:value>
+				<beans:value>org.asu.ss.model.OTP</beans:value>
+				<beans:value>org.asu.ss.model.PasswordReset</beans:value>
+				<beans:value>org.asu.ss.model.Transaction</beans:value>
+				<beans:value>org.asu.ss.model.TempExternalUser</beans:value>
+				<beans:value>org.asu.ss.model.TempTransaction</beans:value>
+				<beans:value>org.asu.ss.model.ObjecttoUI</beans:value>
+				<beans:value>org.asu.ss.model.CreditCardViewBalance</beans:value>
+			</beans:list>
+		</beans:property>
+		<beans:property name="hibernateProperties">
+			<beans:props>
+				<beans:prop key="hibernate.dialect">org.hibernate.dialect.MySQLDialect
+				</beans:prop>
+				<beans:prop key="hibernate.show_sql">true</beans:prop>
+			</beans:props>
+		</beans:property>
+	</beans:bean>
+	<beans:bean id="viewResolver"
+		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<beans:property name="prefix">
+			<beans:value>/WEB-INF/view/</beans:value>
+		</beans:property>
+		<beans:property name="suffix">
+			<beans:value>.jsp</beans:value>
+		</beans:property>
+	</beans:bean>
+	<context:component-scan base-package="org.asu.ss." />
+
+	<tx:annotation-driven transaction-manager="transactionManager" />
+
+	<beans:bean id="transactionManager"
+		class="org.springframework.orm.hibernate4.HibernateTransactionManager">
+		<beans:property name="sessionFactory"
+			ref="hibernate4AnnotatedSessionFactory" />
+	</beans:bean>
+
+	<!-- List DAO and service beans here -->
+	<beans:bean id="accountDAO" class="org.asu.ss.dao.AccountDAO">
+		<beans:property name="sessionFactory"
+			ref="hibernate4AnnotatedSessionFactory" />
+	</beans:bean>
+
+	<beans:bean id="accountService" class="org.asu.ss.service.AccountService">
+		<beans:property name="accountDAO" ref="accountDAO" />
+	</beans:bean>
+
+	<beans:bean id="accountController" class="org.asu.ss.controller.AccountController">
+		<beans:property name="accountService" ref="accountService" />
+	</beans:bean>
+
+	<beans:bean id="extDAO" class="org.asu.ss.dao.ExtDAO">
+		<beans:property name="sessionFactory"
+			ref="hibernate4AnnotatedSessionFactory" />
+	</beans:bean>
+
+	<beans:bean id="extService" class="org.asu.ss.service.ExtService">
+		<beans:property name="extDAO" ref="extDAO" />
+	</beans:bean>
+
+	<beans:bean id="extController" class="org.asu.ss.controller.ExtController">
+		<beans:property name="extService" ref="extService" />
+	</beans:bean>
+	
+	<beans:bean id="intDAO" class="org.asu.ss.dao.IntDAO">
+		<beans:property name="sessionFactory"
+			ref="hibernate4AnnotatedSessionFactory" />
+	</beans:bean>
+
+	<beans:bean id="intService" class="org.asu.ss.service.IntService">
+		<beans:property name="intDAO" ref="intDAO" />
+	</beans:bean>
+
+	<beans:bean id="intController" class="org.asu.ss.controller.IntController">
+		<beans:property name="intService" ref="intService" />
+	</beans:bean>
+
+	<beans:bean id="creditCardDAO" class="org.asu.ss.dao.CreditCardDAO">
+		<beans:property name="sessionFactory"
+			ref="hibernate4AnnotatedSessionFactory" />
+	</beans:bean>
+
+	<beans:bean id="loginDAO" class="org.asu.ss.dao.LoginDAO">
+		<beans:property name="sessionFactory"
+			ref="hibernate4AnnotatedSessionFactory" />
+	</beans:bean>
+
+	<beans:bean id="loginService" class="org.asu.ss.service.LoginService">
+		<beans:property name="loginDAO" ref="loginDAO" />
+	</beans:bean>
+
+	<beans:bean id="loginController" class="org.asu.ss.controller.LoginController">
+		<beans:property name="loginService" ref="loginService" />
+	</beans:bean>
+</beans:beans>
